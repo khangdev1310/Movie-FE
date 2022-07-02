@@ -30,12 +30,26 @@
 @media screen and (min-width: 768px) {
     .App {
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 100px auto auto 100px;
+        grid-template-rows: 100px auto 100px;
         grid-template-areas: 
         "menu header header header"
-        "menu content content content"
         "menu content content content"
         "menu footer footer footer";
     }
 }
+
+@media screen and (min-width: 1024px) {
+    .App {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 100px auto 100px;
+        grid-template-areas: 
+        "menu header header header header header"
+        "menu content content content content content"
+        "menu content content content content content"
+        "menu content content content content content"
+        "menu footer footer footer footer footer";
+    }
+}
+    
+
     
