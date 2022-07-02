@@ -1,0 +1,29 @@
+.App {
+    display: grid;
+    gap: 3px;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 100px auto 100px;
+    grid-template-areas: 
+    "header"
+    "menu"
+    "content"
+    "footer";
+}
+
+.header {
+    grid-area: header;
+}
+
+.menu {
+    grid-area: menu;
+}
+
+.content {
+    grid-area: content;
+}
+
+.footer {
+    grid-area: footer;
+}
+    
