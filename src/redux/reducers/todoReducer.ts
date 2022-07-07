@@ -3,7 +3,7 @@ import {
   FETCH_TODO_FAILURE,
   FETCH_TODO_REQUEST,
   FETCH_TODO_SUCCESS,
-} from "../actitons/actionTypes";
+} from "../constants/todoTypes";
 
 const initialState: TodoState = {
   todos: [],
@@ -19,6 +19,8 @@ export const todoReducer = (state = initialState, action: TodoActions) => {
         pending: true,
       };
     case FETCH_TODO_SUCCESS:
+      console.log(action);
+
       return {
         ...state,
         pending: false,

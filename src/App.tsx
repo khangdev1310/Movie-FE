@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import "./App.css";
 import Login from "./auth/Login";
 import Navbar from "./components/Navbar";
+import Todo from "./features/Todo";
 
 const App: FC = () => {
   const [token, setToken] = useState<string | null>("");
@@ -23,7 +24,7 @@ const App: FC = () => {
     <Login />
   ) : (
     <div className="App">
-      <Navbar />
+      <Todo />
       <p className="text-yellow-500 text-[27px] font-bold">Hello world</p>
     </div>
   );

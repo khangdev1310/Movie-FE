@@ -9,7 +9,7 @@ import {
   FETCH_TODO_FAILURE,
   FETCH_TODO_REQUEST,
   FETCH_TODO_SUCCESS,
-} from "./actionTypes";
+} from "../constants/todoTypes";
 
 export const fetchTodoRequest = (): FetchTodoRequest => ({
   type: FETCH_TODO_REQUEST,

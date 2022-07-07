@@ -1,11 +1,15 @@
-import { ITodo } from "./../../features/TodoTypes";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { FETCH_TODO_REQUEST } from "../actitons/actionTypes";
+import axiosClient from "../../service/axios";
+import { todoAPI } from "../../service/todoAPI";
 import { fetchTodoFailure, fetchTodoSuccess } from "../actitons/actionTodo";
+import { FETCH_TODO_REQUEST } from "../constants/todoTypes";
+import { ITodo } from "./../../features/TodoTypes";
 
-const getTodos = () =>
-  axios.get<ITodo[]>("https://jsonplaceholder.typicode.com/todos");
+const getTodos = () => {
+  return axios.get<ITodo[]>("https://jsonplaceholder.typicode.com/todos");
+};
+
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */

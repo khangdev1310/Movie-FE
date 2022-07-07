@@ -2,7 +2,7 @@ import {
   FETCH_TODO_FAILURE,
   FETCH_TODO_REQUEST,
   FETCH_TODO_SUCCESS,
-} from "../redux/actitons/actionTypes";
+} from "../redux/constants/todoTypes";
 
 export interface ITodo {
   userId: number;
