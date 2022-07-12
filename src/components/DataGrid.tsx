@@ -12,10 +12,8 @@ interface DataGridProps {
 }
 
 const DataGrid: FC<DataGridProps> = ({ data, type }) => {
-  console.log(data, type);
-
   return (
-    <div className="grid grid-cols-repeat(auto-fill,_minmax(150px, 1fr)))] gap-3 md:grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))] ">
+    <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3">
       {data.map((item) => {
         const children = (
           <>
@@ -31,11 +29,13 @@ const DataGrid: FC<DataGridProps> = ({ data, type }) => {
         opacity-0 group-hover:opacity-100 transition duration-300
         "
               >
-                <FaPlay className="fill-white w-5 h-5" />
+                <FaPlay className="w-5 h-5 fill-white" />
               </div>
             </div>
 
-            <p className="mt-2 font-medium line-clamp-3">{item.title}</p>
+            <p className="mt-2 font-medium line-clamp-3  group-hover:text-purple-hover transition duration-300">
+              {item.title}
+            </p>
             {item.description && (
               <p className="text-gray-400 line-clamp-2">{item.description} </p>
             )}
