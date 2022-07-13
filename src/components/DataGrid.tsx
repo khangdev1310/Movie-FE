@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { FaPlay } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 interface DataGridProps {
   data: {
@@ -9,9 +10,10 @@ interface DataGridProps {
     description?: string;
   }[];
   type: "link" | "button";
+  handler: Function;
 }
 
-const DataGrid: FC<DataGridProps> = ({ data, type }) => {
+const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
   return (
     <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3">
       {data.map((item) => {
@@ -42,9 +44,24 @@ const DataGrid: FC<DataGridProps> = ({ data, type }) => {
           </>
         );
 
+        if (type === "link")
+          return (
+            <div key={item.id}>
+              <Link
+                className="w-full block transition duration-300 bg-dark hover:bg-dark-hovered p-2 rounded-md relative group"
+                to={handler(item.id)}
+              >
+                {children}
+              </Link>
+            </div>
+          );
+
         return (
           <div key={item.id}>
-            <div className="w-full transition duration-300 bg-dark hover:bg-dark-hovered p-2 rounded-md relative group cursor-pointer">
+            <div
+              className="w-full transition duration-300 bg-dark hover:bg-dark-hovered p-2 rounded-md relative group cursor-pointer"
+              onClick={() => handler(item.id)}
+            >
               {children}
             </div>
           </div>

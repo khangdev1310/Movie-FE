@@ -4,6 +4,7 @@ import Login from "./auth";
 import Audio from "./components/Audio";
 
 import NavBar from "./components/NavBar";
+import Album from "./features/Album";
 import Home from "./features/Home";
 
 const App: FC = () => {
@@ -30,7 +31,7 @@ const App: FC = () => {
         <NavBar />
         <Routes>
           <Route index element={<Home />} />
-          
+          <Route path="album/:id" element={<Album />} />
         </Routes>
       </div>
 

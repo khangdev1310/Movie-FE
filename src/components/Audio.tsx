@@ -57,7 +57,7 @@ const Audio: FC = () => {
     localStorage.setItem("music-volume", JSON.stringify(volume));
     localStorage.setItem("music-muted", JSON.stringify(+isMuted));
   }, [isMuted, volume]);
-  console.log("Hello");
+ 
 
   return (
     <>
