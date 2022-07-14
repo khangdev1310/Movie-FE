@@ -31,7 +31,7 @@ const NavBar: FC = () => {
         <div
           className="flex items-center cursor-pointer"
           onClick={() => {
-            navigate("/home");
+            navigate("/");
           }}
         >
           <img

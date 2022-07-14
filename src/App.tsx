@@ -4,8 +4,8 @@ import Login from "./auth";
 import Audio from "./components/Audio";
 
 import NavBar from "./components/NavBar";
-import Album from "./features/Album";
-import Home from "./features/Home";
+import Album from "./pages/Album";
+import Home from "./pages/Home";
 
 const App: FC = () => {
   const [token, setToken] = useState<string | null>("");
