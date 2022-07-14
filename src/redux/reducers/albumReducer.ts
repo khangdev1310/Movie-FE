@@ -8,19 +8,24 @@ import {
 
 const initialState: AlbumState = {
   albums: {
-    href: "",
-    items: [],
-    limit: 0,
-    next: "",
-    offset: 0,
-    previous: null,
-    total: 0,
+    albums: {
+      href: "",
+      items: [],
+      limit: 0,
+      next: "",
+      offset: 0,
+      previous: null,
+      total: 0,
+    },
   },
   loading: false,
   error: null,
 };
 
-export const albumReducer = (state = initialState, action: AlbumActions) => {
+export const albumReducer = (
+  state = initialState,
+  action: AlbumActions
+): AlbumState => {
   switch (action.type) {
     case FETCH_ALBUM_REQUEST:
       return {
@@ -29,18 +34,15 @@ export const albumReducer = (state = initialState, action: AlbumActions) => {
       };
 
     case FETCH_ALBUM_SUCCESS:
-
-    console.log(action.payload.data);
-    
+      console.log(action.payload);
       return {
         ...state,
         albums: action.payload.data,
-        loading: false,
       };
     case FETCH_ALBUM_FAILURE:
       return {
         ...state,
-        albums: [],
+        error: action.payload.error,
         loading: false,
       };
     default:

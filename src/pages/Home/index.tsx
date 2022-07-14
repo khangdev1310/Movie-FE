@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataGrid from "../../components/DataGrid";
 import { fetchAlbumRequest } from "../../redux/actions/albumAction";
-import { AppState } from "../../redux/rootReducer";
+import { AppState, useAppSelector } from "../../redux/rootReducer";
 import DataTest from "../../ultils/index";
 import { albumReducer } from "../../redux/reducers/albumReducer";
 import { AlbumState, IAlbum, IAlbumItem } from "../../models/album.model";
@@ -10,9 +10,9 @@ import { RootState } from "../../redux/store";
 import Loader from "../../components/Loader";
 
 const Home: FC = () => {
-  const [musicID, setMusicId] = useState("");
-
-  const { albums, error, loading } = useSelector((state: any) => state);
+  const { albums, error, loading } = useAppSelector(
+    (state: AppState) => state.album
+  );
 
   const dispatch = useDispatch();
 
@@ -34,8 +34,8 @@ const Home: FC = () => {
       />
 
       <h1 className="mt-4 mb-3 text-2xl">New Releases</h1>
-      {/* <DataGrid
-        data={albums
+      <DataGrid
+        data={albums?.albums?.items
           ?.filter((track: any) => track.name)
           ?.map((item: any) => ({
             id: item.id,
@@ -45,7 +45,7 @@ const Home: FC = () => {
           }))}
         type="link"
         handler={(id: string) => `/album/${id}}`}
-      /> */}
+      />
 
       <h1 className="mt-4 mb-3 text-2xl">Categories</h1>
       <DataGrid

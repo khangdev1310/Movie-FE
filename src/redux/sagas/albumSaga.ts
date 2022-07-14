@@ -16,7 +16,6 @@ const getAlbums = () => {
 function* fetchAlbumSaga() {
   try {
     const response: AxiosResponse<IAlbum> = yield call(getAlbums);
-    
 
     yield put(
       fetchAlbumSuccess({
