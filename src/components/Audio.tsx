@@ -90,7 +90,7 @@ const Audio: FC = () => {
       <div className="sticky bottom-0 left-0 right-0 h-20 flex items-center bg-dark border-t-2 border-gray-800 px-[5vw]">
         <div className="flex flex-1 justify-start gap-3 items-center">
           <img
-            src="./test.jpg"
+            src="/test.jpg"
             alt="audio"
             className="w-14 h-14 object-cover"
           />

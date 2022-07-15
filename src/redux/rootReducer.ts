@@ -1,11 +1,12 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { combineReducers, Reducer } from "redux";
-import { AlbumState } from "../models/album.model";
+import { combineReducers } from "redux";
 import { albumReducer } from "./reducers/albumReducer";
+import { detailedAlbumReducer } from "./reducers/detailedAlbumReducer";
 import { AppDispatch, RootState } from "./store";
 
 const rootReducer = combineReducers({
   album: albumReducer,
+  detailedAlbum: detailedAlbumReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

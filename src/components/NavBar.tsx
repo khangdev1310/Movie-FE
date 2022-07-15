@@ -25,7 +25,7 @@ const NavBar: FC = () => {
     <div
       className={`${
         isOpen ? "h-[122px]" : "h-16"
-      } sm:!h-16 border-b border-gray-800 flex flex-col sm:flex-row justify-center gap-4 sm:justify-between items-stretch sm:items-center px-[5vw] `}
+      } md:!h-16 border-b border-gray-800 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-stretch md:items-center px-[5vw] `}
     >
       <div className="flex justify-between items-center">
         <div

@@ -14,6 +14,8 @@ interface DataGridProps {
 }
 
 const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
+
+  
   return (
     <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3">
       {data.map((item) => {
