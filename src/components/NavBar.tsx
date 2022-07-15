@@ -2,6 +2,7 @@ import { FC, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
+import clsx from "clsx";
 
 const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,12 +23,9 @@ const NavBar: FC = () => {
   };
 
   return (
-    <div
-      className={`${
-        isOpen ? "h-[122px]" : "h-16"
-      } sm:!h-16 border-b border-gray-800 flex flex-col sm:flex-row justify-center gap-4 sm:justify-between items-stretch sm:items-center px-[5vw] `}
-    >
-      <div className="flex justify-between items-center">
+    <div className={clsx([isOpen ? 'h-[122px]' : 'h-16'],
+      ['!h-16 md:h-[122px] border-b border-gray-800 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-stretch md:items-center px-[5vw] '])}>
+      <div className="flex items-center justify-between">
         <div
           className="flex items-center cursor-pointer"
           onClick={() => {
@@ -35,13 +33,13 @@ const NavBar: FC = () => {
           }}
         >
           <img
-            className="w-12 h-12 rotate-45 justify-between"
+            className="justify-between w-12 h-12 rotate-45"
             src="/music1.png"
             alt="music"
           />
           <h1 className="text-xl">Music</h1>
         </div>
-        <button className="sm:hidden" onClick={handleOpen}>
+        <button className="hidden md:block" onClick={handleOpen}>
           {isOpen ? (
             <MdCancel className="w-6 h-6 font-extrabold" />
           ) : (
@@ -61,7 +59,7 @@ const NavBar: FC = () => {
           className="bg-dark border border-gray-600 rounded-full w-full px-3 py-2 outline-none md:w-60 duration-300 hover:border-purple-hover pr-[40px]
 		  "
         />
-        <button className="absolute right-2 top-1/2 -translate-y-1/2">
+        <button className="absolute -translate-y-1/2 right-2 top-1/2">
           <AiOutlineSearch className="w-6 h-6" />
         </button>
       </form>
