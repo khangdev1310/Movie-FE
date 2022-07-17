@@ -88,11 +88,11 @@ const Audio: FC = () => {
         }}
       ></audio>
       <div className="sticky bottom-0 left-0 right-0 h-20 flex items-center bg-dark border-t-2 border-gray-800 px-[5vw]">
-        <div className="flex flex-1 justify-start gap-3 items-center">
+        <div className="flex items-center justify-start flex-1 gap-3">
           <img
             src="./test.jpg"
             alt="audio"
-            className="w-14 h-14 object-cover"
+            className="object-cover w-14 h-14"
           />
           <div className="hidden md:block">
             <h1 className="line-clamp-1">TestAudio</h1>
@@ -102,8 +102,8 @@ const Audio: FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center flex-col flex-1">
-          <div className="flex justify-center items-center gap-5">
+        <div className="flex flex-col items-center justify-center flex-1">
+          <div className="flex items-center justify-center gap-5">
             <button
               title={isLoop ? "Disable repeat" : "Enable repeat"}
               onClick={() => setIsLoop(!isLoop)}
@@ -127,9 +127,9 @@ const Audio: FC = () => {
               {isError ? (
                 <span className="text-red-500">{`!`}</span>
               ) : isPaused ? (
-                <FaPlay className="fill-white w-3 h-3 group-hover:fill-purple-hover" />
+                <FaPlay className="w-3 h-3 fill-white group-hover:fill-purple-hover" />
               ) : (
-                <IoMdPause className="fill-purple-hover w-3 h-3 group-hover:fill-white" />
+                <IoMdPause className="w-3 h-3 fill-purple-hover group-hover:fill-white" />
               )}
             </button>
 
@@ -139,18 +139,18 @@ const Audio: FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <RiExternalLinkLine className="fill-white w-5 h-5 hover:fill-purple-hover duration-200 transition" />
+              <RiExternalLinkLine className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
             </a>
           </div>
 
-          <div className="hidden md:flex justify-center items-center gap-4 text-sm w-full">
+          <div className="items-center justify-center hidden w-full gap-4 text-sm md:flex">
             <span className="flex-shrink-0">
               {formatDuration(currentTime * 1000)}
             </span>
 
             <Volume
               className="flex-grow max-w-[400px]"
-              width={duration != 0 ? (currentTime / duration) * 100 : 0}
+              width={duration !== 0 ? (currentTime / duration) * 100 : 0}
               setWidth={(val: number) => {
                 setCurrentTime((val / 100) * duration);
                 if (audioRef.current) {
@@ -164,7 +164,7 @@ const Audio: FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-1 justify-end items-center gap-3">
+        <div className="flex items-center justify-end flex-1 gap-3">
           <button
             title={isMuted || volume === 0 ? "Unmute" : "Mute"}
             onClick={() => {
@@ -177,9 +177,9 @@ const Audio: FC = () => {
             }}
           >
             {isMuted || volume === 0 ? (
-              <MdVolumeOff className="fill-white w-5 h-5 hover:fill-purple-hover transition duration-200" />
+              <MdVolumeOff className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
             ) : (
-              <MdVolumeUp className="fill-white w-5 h-5 hover:fill-purple-hover transition duration-200" />
+              <MdVolumeUp className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
             )}
           </button>
           <div className="hidden md:block">
