@@ -11,10 +11,10 @@ const App: FC = () => {
   const [token, setToken] = useState<string | null>("");
 
   useEffect(() => {
-    const hash: string = window.location.hash;
-    const accessToken: string | null = localStorage.getItem("token");
+    const hash = window.location.hash;
+    const accessToken = localStorage.getItem("token");
     if (!accessToken && hash) {
-      let _token: string = hash.split("&")[0].split("=")[1];
+      let _token = hash.split("&")[0].split("=")[1];
       window.location.hash = "";
       window.localStorage.setItem("token", _token);
       setToken(_token);
