@@ -1,14 +1,22 @@
-import React, { FC, Fragment, useEffect, useRef } from "react";
-import { useState } from "react";
-import { MdRepeat, MdVolumeOff, MdVolumeUp } from "react-icons/md";
-import { RiExternalLinkLine } from "react-icons/ri";
+import { FC, Fragment, useEffect, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { IoMdPause } from "react-icons/io";
+import { MdRepeat, MdVolumeOff, MdVolumeUp } from "react-icons/md";
+import { RiExternalLinkLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { fetchAudioRequest } from "../redux/actions/audioAction";
+import { AppState, useAppDispatch, useAppSelector } from "../redux/rootReducer";
 import { formatDuration } from "../ultils";
 import Volume from "./Volume";
 
 const Audio: FC = () => {
+  // get audio from store
+  const { audio, loading, error } = useAppSelector(
+    (state: AppState) => state.audio
+  );
+
+  const dispatch = useAppDispatch();
+
   // State for audio
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(
@@ -36,6 +44,8 @@ const Audio: FC = () => {
       if (e.key === " ") e.preventDefault();
     };
 
+    dispatch(fetchAudioRequest("2takcwOaAZWiXQijPHIx7B"));
+
     window.addEventListener("keyup", handler);
     window.addEventListener("keydown", spacePressedHandler);
 
@@ -57,14 +67,13 @@ const Audio: FC = () => {
     localStorage.setItem("music-volume", JSON.stringify(volume));
     localStorage.setItem("music-muted", JSON.stringify(+isMuted));
   }, [isMuted, volume]);
- 
 
   return (
     <>
       <audio
         controls
         ref={audioRef}
-        src="https://p.scdn.co/mp3-preview/4da72a9b39cc80395fc93795c2ca93079d4c5d4b?cid=fea4cc8d6f3b4c02b39922b75a6bd658"
+        src={audio.tracks[0]?.preview_url}
         className="hidden"
         hidden
         autoPlay={false}
@@ -90,14 +99,21 @@ const Audio: FC = () => {
       <div className="sticky bottom-0 left-0 right-0 h-20 flex items-center bg-dark border-t-2 border-gray-800 px-[5vw]">
         <div className="flex flex-1 justify-start gap-3 items-center">
           <img
-            src="/test.jpg"
+            src={audio.tracks[0]?.album?.images[0]?.url}
             alt="audio"
             className="w-14 h-14 object-cover"
           />
           <div className="hidden md:block">
-            <h1 className="line-clamp-1">TestAudio</h1>
+            <h1 className="line-clamp-1">{audio.tracks[0]?.name} </h1>
             <p className="text-gray-400 line-clamp-1">
-              <Link to={`artists/id`}>WINNER</Link>
+              <Link to={`artists/id`}>
+                {audio.tracks[0].artists.map((artist, index) => (
+                  <Fragment key={artist.id}>
+                    {index !== 0 && <span>, </span>}
+                    <Link to={`/artist/${artist.id}`}>{artist.name}</Link>
+                  </Fragment>
+                ))}
+              </Link>
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
-import { FC, useEffect } from "react";
+import { FC, Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { fetchDetailedAlbumRequest } from "../../redux/actions/detailedAlbumAction";
 import { AppState, useAppSelector } from "../../redux/rootReducer";
@@ -24,9 +25,18 @@ const Album: FC = () => {
           src={details?.images[0]?.url}
           alt=""
         />
-        <h1 className="text-center text-2xl font-semibold my-3">test</h1>
+        <h1 className="text-center text-2xl font-semibold my-3">
+          {details.name}
+        </h1>
 
-        <div className="flex flex-wrap justify-center text-gray-400">IZTY</div>
+        <div className="flex flex-wrap justify-center text-gray-400">
+          {details.artists.map((artist, index) => (
+            <Fragment key={artist.id}>
+              {index !== 0 && <span>, </span>}
+              <Link to="">{artist.name}</Link>
+            </Fragment>
+          ))}
+        </div>
       </div>
 
       <div className="flex-grow w-full md:w-auto">
