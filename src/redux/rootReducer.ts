@@ -5,6 +5,7 @@ import { audioReducer } from "./reducers/audioReducer";
 import { categoryPlaylistsReducer } from "./reducers/category-playlistsReducer";
 import { categoryReducer } from "./reducers/categoryReducer";
 import { detailedAlbumReducer } from "./reducers/detailedAlbumReducer";
+import { searchReducer } from "./reducers/searchReducer";
 import { AppDispatch, RootState } from "./store";
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   detailedAlbum: detailedAlbumReducer,
   audio: audioReducer,
   category: categoryReducer,
-  categoryPlaylists: categoryPlaylistsReducer
+  categoryPlaylists: categoryPlaylistsReducer,
+  search: searchReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
