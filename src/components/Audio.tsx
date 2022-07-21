@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect, useRef, useState } from "react";
+import { FC, Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { IoMdPause } from "react-icons/io";
 import { MdRepeat, MdVolumeOff, MdVolumeUp } from "react-icons/md";
@@ -7,13 +7,20 @@ import { Link } from "react-router-dom";
 import { fetchAudioRequest } from "../redux/actions/audioAction";
 import { AppState, useAppDispatch, useAppSelector } from "../redux/rootReducer";
 import { formatDuration } from "../ultils";
+import useAudio from "./useAudio";
 import Volume from "./Volume";
 
-const Audio: FC = () => {
+type AudioProps = {
+  playerId: string;
+};
+
+const Audio: FC<AudioProps> = ({ playerId }) => {
   // get audio from store
   const { audio, loading, error } = useAppSelector(
     (state: AppState) => state.audio
   );
+
+  //Get id when change tracks
 
   const dispatch = useAppDispatch();
 
@@ -28,7 +35,7 @@ const Audio: FC = () => {
   const [duration, setDuration] = useState(0);
   const [isLoop, setIsLoop] = useState(false);
 
-  const [isPaused, setIsPaused] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
 
   const isError = false;
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -43,8 +50,6 @@ const Audio: FC = () => {
     const spacePressedHandler = (e: KeyboardEvent) => {
       if (e.key === " ") e.preventDefault();
     };
-
-    dispatch(fetchAudioRequest("2takcwOaAZWiXQijPHIx7B"));
 
     window.addEventListener("keyup", handler);
     window.addEventListener("keydown", spacePressedHandler);
@@ -67,6 +72,11 @@ const Audio: FC = () => {
     localStorage.setItem("music-volume", JSON.stringify(volume));
     localStorage.setItem("music-muted", JSON.stringify(+isMuted));
   }, [isMuted, volume]);
+
+  useEffect(() => {
+    dispatch(fetchAudioRequest(playerId));
+    setIsPaused(true);
+  }, [playerId]);
 
   return (
     <>
@@ -106,14 +116,12 @@ const Audio: FC = () => {
           <div className="hidden md:block">
             <h1 className="line-clamp-1">{audio.tracks[0]?.name} </h1>
             <p className="text-gray-400 line-clamp-1">
-              <Link to={`artists/id`}>
-                {audio.tracks[0].artists.map((artist, index) => (
-                  <Fragment key={artist.id}>
-                    {index !== 0 && <span>, </span>}
-                    <Link to={`/artist/${artist.id}`}>{artist.name}</Link>
-                  </Fragment>
-                ))}
-              </Link>
+              {audio.tracks[0].artists.map((artist, index) => (
+                <Fragment key={artist.id}>
+                  {index !== 0 && <span>, </span>}
+                  <Link to={`/artist/${artist.id}`}>{artist.name}</Link>
+                </Fragment>
+              ))}
             </p>
           </div>
         </div>

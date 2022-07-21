@@ -2,14 +2,21 @@ import { FC, Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import useAudio from "../../components/useAudio";
 import { fetchDetailedAlbumRequest } from "../../redux/actions/detailedAlbumAction";
 import { AppState, useAppSelector } from "../../redux/rootReducer";
 import { formatDuration } from "../../ultils";
 
-const Album: FC = () => {
+type AlbumProps = {
+  setPlayerId: Function;
+  setIsPlayerIdChanged: Function;
+};
+
+const Album: FC<AlbumProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
   const { details, error, loading } = useAppSelector(
     (state: AppState) => state.detailedAlbum
   );
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -45,6 +52,10 @@ const Album: FC = () => {
             <button
               className="w-full flex justify-between items-center p-2 text-left bg-dark hover:bg-dark-hovered group transition duration-300"
               key={item.id}
+              onClick={() => {
+                setPlayerId(item.id);
+                setIsPlayerIdChanged(true);
+              }}
             >
               <div className="flex items-center gap-5">
                 <div className="text-xl text-gray-400  w-5 text-right">

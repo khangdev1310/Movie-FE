@@ -4,11 +4,13 @@ import Login from "./auth";
 import Audio from "./components/Audio";
 
 import NavBar from "./components/NavBar";
+import useAudio from "./components/useAudio";
 import Album from "./pages/Album";
 import Home from "./pages/Home";
 
 const App: FC = () => {
   const [token, setToken] = useState<string | null>("");
+  const { playerId, setPlayerId, setIsPlayerIdChanged } = useAudio();
 
   useEffect(() => {
     const hash: string = window.location.hash;
@@ -23,6 +25,10 @@ const App: FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("minizing-playing", playerId);
+  }, [playerId]);
+
   return !token ? (
     <Login />
   ) : (
@@ -31,11 +37,18 @@ const App: FC = () => {
         <NavBar />
         <Routes>
           <Route index element={<Home />} />
-          <Route path="album/:id" element={<Album />} />
+          <Route
+            path="album/:id"
+            element={
+              <Album
+                setPlayerId={setPlayerId}
+                setIsPlayerIdChanged={setIsPlayerIdChanged}
+              />
+            }
+          />
         </Routes>
       </div>
-
-      <Audio />
+      {playerId && <Audio playerId={playerId} />}
     </div>
   );
 };
