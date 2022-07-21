@@ -116,7 +116,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
           <div className="hidden md:block">
             <h1 className="line-clamp-1">{audio.tracks[0]?.name} </h1>
             <p className="text-gray-400 line-clamp-1">
-              {audio.tracks[0].artists.map((artist, index) => (
+              {audio.tracks[0]?.artists.map((artist, index) => (
                 <Fragment key={artist.id}>
                   {index !== 0 && <span>, </span>}
                   <Link to={`/artist/${artist.id}`}>{artist.name}</Link>

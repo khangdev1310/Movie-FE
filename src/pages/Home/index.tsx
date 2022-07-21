@@ -1,23 +1,28 @@
-import { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import DataGrid from "../../components/DataGrid";
 import { fetchAlbumRequest } from "../../redux/actions/albumAction";
+import { fetchCategoryRequest } from "../../redux/actions/categoryAction";
 import { AppState, useAppSelector } from "../../redux/rootReducer";
 import DataTest from "../../ultils/index";
-import { albumReducer } from "../../redux/reducers/albumReducer";
-import { AlbumState, IAlbum, IAlbumItem } from "../../models/album.model";
-import { RootState } from "../../redux/store";
-import Loader from "../../components/Loader";
 
-const Home: FC = () => {
+type HomeProps = {
+  setPlayerId: Function;
+  setIsPlayerIdChanged: Function;
+};
+
+const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
   const { albums, error, loading } = useAppSelector(
     (state: AppState) => state.album
   );
+
+  const { data } = useAppSelector((state: AppState) => state.category);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchAlbumRequest());
+    dispatch(fetchCategoryRequest());
   }, []);
 
   // if (!albums) return <Loader />;
@@ -26,10 +31,11 @@ const Home: FC = () => {
     <div className="mx-[5vw] pb-6">
       <h1 className="mt-4 mb-3 text-2xl">Recommended</h1>
       <DataGrid
-        data={DataTest.getData()}
+        data={DataTest.getReleases()}
         type="button"
-        handler={() => {
-          console.log("Test click");
+        handler={(id: string) => {
+          setPlayerId(id);
+          setIsPlayerIdChanged(true);
         }}
       />
 
@@ -53,7 +59,13 @@ const Home: FC = () => {
 
       <h1 className="mt-4 mb-3 text-2xl">Categories</h1>
       <DataGrid
-        data={DataTest.getCategories()}
+        data={data?.categories?.items.map((item: any) => {
+          return {
+            id: item.id,
+            title: item.name,
+            image: item.icons[0].url,
+          };
+        })}
         type="link"
         handler={(id: string) => `/categories/${id}}`}
       />

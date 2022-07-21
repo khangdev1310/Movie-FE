@@ -1,8 +1,6 @@
 import { FC, Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import useAudio from "../../components/useAudio";
+import { Link, useParams } from "react-router-dom";
 import { fetchDetailedAlbumRequest } from "../../redux/actions/detailedAlbumAction";
 import { AppState, useAppSelector } from "../../redux/rootReducer";
 import { formatDuration } from "../../ultils";

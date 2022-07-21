@@ -36,7 +36,15 @@ const App: FC = () => {
       <div className="min-h-full">
         <NavBar />
         <Routes>
-          <Route index element={<Home />} />
+          <Route
+            index
+            element={
+              <Home
+                setPlayerId={setPlayerId}
+                setIsPlayerIdChanged={setIsPlayerIdChanged}
+              />
+            }
+          />
           <Route
             path="album/:id"
             element={
