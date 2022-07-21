@@ -7,7 +7,7 @@ import {
 } from "../types/albumTypes";
 
 const initialState: AlbumState = {
-  albums: {
+  data: {
     albums: {
       href: "",
       items: [],
@@ -37,7 +37,7 @@ export const albumReducer = (
       console.log(action.payload);
       return {
         ...state,
-        albums: action.payload.data,
+        data: action.payload.data,
       };
     case FETCH_ALBUM_FAILURE:
       return {

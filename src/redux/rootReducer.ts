@@ -5,7 +5,7 @@ import { albumReducer } from "./reducers/albumReducer";
 import { AppDispatch, RootState } from "./store";
 
 const rootReducer = combineReducers({
-  album: albumReducer,
+  albums: albumReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
