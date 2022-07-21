@@ -1,8 +1,8 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { combineReducers, Reducer } from "redux";
-import { AlbumState } from "../models/album.model";
-import { albumReducer } from "./reducers/albumReducer";
 import { AppDispatch, RootState } from "./store";
+
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { combineReducers } from "redux";
+import { albumReducer } from "./reducers/albumReducer";
 
 const rootReducer = combineReducers({
   albums: albumReducer,
