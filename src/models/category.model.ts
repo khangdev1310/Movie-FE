@@ -18,18 +18,6 @@ export interface ICategories {
   total: number;
 }
 
-// export interface ICategories {
-//   categories: {
-//     href: string;
-//     items: Item[];
-//     limit: number;
-//     next: string;
-//     offset: number;
-//     previous: any;
-//     total: number;
-//   };
-// }
-
 export interface Item {
   href: string;
   icons: Icon[];

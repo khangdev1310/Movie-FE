@@ -67,7 +67,7 @@ const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
           };
         })}
         type="link"
-        handler={(id: string) => `/categories/${id}}`}
+        handler={(id: string) => `/category/` + id}
       />
     </div>
   );
