@@ -8,7 +8,7 @@ export interface Root {
   albums: Albums;
   tracks: Tracks;
   playlists: Playlists;
-  artists: Artist;
+  artists: Artists;
 }
 
 export interface Albums {
@@ -38,6 +38,33 @@ export interface Playlists {
   next: any;
   offset: number;
   previous: any;
+  total: number;
+}
+
+export interface Artists {
+  href: string;
+  items: Item2[];
+  limit: number;
+  next: string;
+  offset: number;
+  previous: any;
+  total: number;
+}
+
+export interface Item2 {
+  external_urls: string;
+  followers: Followers;
+  genres: string[];
+  href: string;
+  id: string;
+  images: Image2[];
+  name: string;
+  popularity: number;
+  type: string;
+  uri: string;
+}
+export interface Followers {
+  href: any;
   total: number;
 }
 

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import DataGrid from "../../components/DataGrid";
 import { fetchSearchRequest } from "../../redux/actions/searchAction";
 import { useAppSelector } from "../../redux/rootReducer";
+import { formatNumber } from "../../ultils";
 
 type SearchProps = {
   setPlayerId: Function;
@@ -21,7 +22,7 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
     [location.search]
   );
 
-  console.log(data);
+  
 
   useEffect(() => {
     dispatch(fetchSearchRequest(q));
@@ -30,6 +31,23 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
   return (
     <div className="mx-[5vw] mb-5">
       <h1 className="text-3xl mt-5">Search result for: {q}</h1>
+
+      <h1 className="mt-5 mb-2 text-2xl">Artists</h1>
+
+      <DataGrid
+        type="link"
+        handler={(id: string) => `/artist/${id}`}
+        data={
+          data.artists?.items
+            .filter((artist) => artist.name)
+            .map((artist) => ({
+              id: artist.id,
+              image: artist?.images?.[0]?.url,
+              title: artist.name,
+              description: `${formatNumber(artist.followers.total)} followers`,
+            })) as any
+        }
+      />
 
       <h1 className="mt-5 mb-2 text-2xl">Tracks</h1>
 

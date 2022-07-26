@@ -34,6 +34,15 @@ const initialState: SearchState = {
       previous: "",
       total: 0,
     },
+    artists: {
+      href: "",
+      items: [],
+      limit: 0,
+      next: "",
+      offset: 0,
+      previous: "",
+      total: 0,
+    },
   },
 
   loading: false,

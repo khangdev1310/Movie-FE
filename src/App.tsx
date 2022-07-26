@@ -6,6 +6,7 @@ import Audio from "./components/Audio";
 import NavBar from "./components/NavBar";
 import useAudio from "./components/useAudio";
 import Album from "./pages/Album";
+import Artist from "./pages/Artist";
 import Category from "./pages/Category";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
@@ -72,6 +73,7 @@ const App: FC = () => {
               />
             }
           />
+          <Route path="artist/:id" element={<Artist setPlayerId={setPlayerId}/>} />
         </Routes>
       </div>
       {playerId && <Audio playerId={playerId} />}
