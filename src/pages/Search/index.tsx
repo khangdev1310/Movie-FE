@@ -22,11 +22,10 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
     [location.search]
   );
 
-  
 
   useEffect(() => {
     dispatch(fetchSearchRequest(q));
-  }, []);
+  }, [q]);
 
   return (
     <div className="mx-[5vw] mb-5">
@@ -40,12 +39,24 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
         data={
           data.artists?.items
             .filter((artist) => artist.name)
-            .map((artist) => ({
-              id: artist.id,
-              image: artist?.images?.[0]?.url,
-              title: artist.name,
-              description: `${formatNumber(artist.followers.total)} followers`,
-            })) as any
+            .map((artist) => {
+              if (artist.images.length > 0) {
+                return {
+                  id: artist?.id,
+                  image: artist?.images[0]?.url,
+                  title: artist?.name,
+                  description: artist?.genres.join(", "),
+                };
+              }
+              else {
+                return {
+                  id: artist?.id,
+                  image: "https://via.placeholder.com/150",
+                  title: artist?.name,
+                  description: artist?.genres.join(", "),
+                };
+              }
+            }) as any
         }
       />
 
