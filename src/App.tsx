@@ -41,8 +41,8 @@ const App: FC = () => {
   return !token ? (
     <Login />
   ) : (
-    <div className="App">
-      <div className="min-h-full">
+    <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">
+      <div className="min-h-full text-black font-bold dark:text-white ">
         <NavBar />
         <Routes>
           <Route
@@ -73,7 +73,10 @@ const App: FC = () => {
               />
             }
           />
-          <Route path="artist/:id" element={<Artist setPlayerId={setPlayerId}/>} />
+          <Route
+            path="artist/:id"
+            element={<Artist setPlayerId={setPlayerId} />}
+          />
         </Routes>
       </div>
       {playerId && <Audio playerId={playerId} />}
