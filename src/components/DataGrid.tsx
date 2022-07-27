@@ -2,13 +2,15 @@ import React, { FC } from "react";
 import { FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-interface DataGridProps {
-  data: {
+type DataType = {
     id: string;
     image: string;
     title: string;
     description?: string;
-  }[];
+  };
+
+interface DataGridProps {
+  data: DataType[];
   type: "link" | "button";
   handler: Function;
 }
