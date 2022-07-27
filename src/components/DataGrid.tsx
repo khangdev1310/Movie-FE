@@ -14,10 +14,8 @@ interface DataGridProps {
 }
 
 const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
-
-  
   return (
-    <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3">
+    <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3 text-white font-bold">
       {data.map((item) => {
         const children = (
           <>
@@ -25,7 +23,7 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
               <img
                 src={item.image}
                 alt="test"
-                className="absolute h-full w-full object-cover rounded-md group-hover:brightness-[80%] transition duration-300"
+                className="absolute h-full w-full object-cover dark:rounded-md group-hover:brightness-[80%] transition duration-300"
               />
 
               <div
@@ -37,11 +35,13 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
               </div>
             </div>
 
-            <p className="mt-2 font-medium line-clamp-3  group-hover:text-purple-hover transition duration-300">
+            <p className="mt-2 font-medium line-clamp-3  dark:group-hover:text-purple-hover transition duration-300 text-indigo-600 dark:text-white">
               {item.title}
             </p>
             {item.description && (
-              <p className="text-gray-400 line-clamp-2">{item.description} </p>
+              <p className="text-dark dark:text-gray-400 line-clamp-2">
+                {item.description}{" "}
+              </p>
             )}
           </>
         );
@@ -50,7 +50,9 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
           return (
             <div key={item.id}>
               <Link
-                className="w-full block transition duration-300 bg-dark hover:bg-dark-hovered p-2 rounded-md relative group"
+                className="w-full block transition duration-300  p-2 
+                rounded-md relative group shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-500
+                dark:from-dark dark:to-dark dark:hover:bg-dark-hovered "
                 to={handler(item.id)}
               >
                 {children}
@@ -61,7 +63,8 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
         return (
           <div key={item.id}>
             <div
-              className="w-full transition duration-300 bg-dark hover:bg-dark-hovered p-2 rounded-md relative group cursor-pointer"
+              className="w-full transition duration-300  p-2 rounded-md relative group cursor-pointer shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-700
+              dark:from-dark dark:to-dark dark:hover:bg-dark-hovered "
               onClick={() => handler(item.id)}
             >
               {children}
