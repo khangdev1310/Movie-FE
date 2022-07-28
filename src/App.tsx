@@ -9,6 +9,7 @@ import Album from "./pages/Album";
 import Artist from "./pages/Artist";
 import Category from "./pages/Category";
 import Home from "./pages/Home";
+import Playlist from "./pages/Playlist";
 import Search from "./pages/Search";
 
 const App: FC = () => {
@@ -76,6 +77,11 @@ const App: FC = () => {
           <Route
             path="artist/:id"
             element={<Artist setPlayerId={setPlayerId} />}
+          />
+
+          <Route
+            path="playlist/:id"
+            element={<Playlist setPlayerId={setPlayerId} />}
           />
         </Routes>
       </div>
