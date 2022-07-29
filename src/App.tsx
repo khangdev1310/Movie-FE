@@ -1,9 +1,8 @@
-import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
-import Audio from "./components/Audio";
-
-import NavBar from "./components/NavBar";
-import Home from "./features/Home";
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Audio from './components/Audio';
+import NavBar from './components/NavBar';
+import Home from './features/Home';
 
 const App: FC = () => {
   return (

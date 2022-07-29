@@ -1,21 +1,21 @@
-import React, { FC, Fragment, useEffect, useRef } from "react";
-import { useState } from "react";
-import { MdRepeat, MdVolumeOff, MdVolumeUp } from "react-icons/md";
-import { RiExternalLinkLine } from "react-icons/ri";
-import { FaPlay } from "react-icons/fa";
-import { IoMdPause } from "react-icons/io";
-import { Link } from "react-router-dom";
-import { formatDuration } from "../ultils";
-import Volume from "./Volume";
+import { FC, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { MdRepeat, MdVolumeOff, MdVolumeUp } from 'react-icons/md';
+import { RiExternalLinkLine } from 'react-icons/ri';
+import { FaPlay } from 'react-icons/fa';
+import { IoMdPause } from 'react-icons/io';
+import { Link } from 'react-router-dom';
+import { formatDuration } from '../ultils';
+import Volume from './Volume';
 
 const Audio: FC = () => {
   // State for audio
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(
-    Number(localStorage.getItem("music-volume") || 1)
+    Number(localStorage.getItem('music-volume') || 1)
   );
   const [isMuted, setIsMuted] = useState(
-    Number(localStorage.getItem("music-muted")) || false
+    Number(localStorage.getItem('music-muted')) || false
   );
   const [duration, setDuration] = useState(0);
   const [isLoop, setIsLoop] = useState(false);
@@ -28,20 +28,20 @@ const Audio: FC = () => {
   // Effect
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === " ") {
+      if (e.key === ' ') {
         setIsPaused((prev) => !prev);
       }
     };
     const spacePressedHandler = (e: KeyboardEvent) => {
-      if (e.key === " ") e.preventDefault();
+      if (e.key === ' ') e.preventDefault();
     };
 
-    window.addEventListener("keyup", handler);
-    window.addEventListener("keydown", spacePressedHandler);
+    window.addEventListener('keyup', handler);
+    window.addEventListener('keydown', spacePressedHandler);
 
     return () => {
-      window.removeEventListener("keyup", handler);
-      window.removeEventListener("keydown", spacePressedHandler);
+      window.removeEventListener('keyup', handler);
+      window.removeEventListener('keydown', spacePressedHandler);
     };
   }, []);
 
@@ -54,10 +54,9 @@ const Audio: FC = () => {
     if (audioRef.current) {
       audioRef.current.volume = isMuted ? 0 : volume;
     }
-    localStorage.setItem("music-volume", JSON.stringify(volume));
-    localStorage.setItem("music-muted", JSON.stringify(+isMuted));
+    localStorage.setItem('music-volume', JSON.stringify(volume));
+    localStorage.setItem('music-muted', JSON.stringify(+isMuted));
   }, [isMuted, volume]);
-  console.log("Hello");
 
   return (
     <>
@@ -105,23 +104,23 @@ const Audio: FC = () => {
         <div className="flex flex-col items-center justify-center flex-1">
           <div className="flex items-center justify-center gap-5">
             <button
-              title={isLoop ? "Disable repeat" : "Enable repeat"}
+              title={isLoop ? 'Disable repeat' : 'Enable repeat'}
               onClick={() => setIsLoop(!isLoop)}
             >
               <MdRepeat
                 className={`${
                   isLoop
-                    ? "fill-purple-hover"
-                    : "fill-white hover:fill-purple-hover"
+                    ? 'fill-purple-hover'
+                    : 'fill-white hover:fill-purple-hover'
                 } w-5 h-5 transition duration-200`}
               />
             </button>
 
             <button
-              title={isError ? "Error" : isPaused ? "Play" : "Pause"}
+              title={isError ? 'Error' : isPaused ? 'Play' : 'Pause'}
               className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200${
-                isError ? "border-red-500" : ""
-              } ${isPaused ? "" : "border-purple-hover"}`}
+                isError ? 'border-red-500' : ''
+              } ${isPaused ? '' : 'border-purple-hover'}`}
               onClick={() => setIsPaused((prev) => !prev)}
             >
               {isError ? (
@@ -166,7 +165,7 @@ const Audio: FC = () => {
 
         <div className="flex items-center justify-end flex-1 gap-3">
           <button
-            title={isMuted || volume === 0 ? "Unmute" : "Mute"}
+            title={isMuted || volume === 0 ? 'Unmute' : 'Mute'}
             onClick={() => {
               if (volume === 0) {
                 setVolume(1);
