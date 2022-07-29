@@ -1,12 +1,12 @@
-import { FC, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
-import { MdCancel } from "react-icons/md";
-import clsx from "clsx";
+import { FC, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { MdCancel } from 'react-icons/md';
+import clsx from 'clsx';
 
 const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   const navigate = useNavigate();
 
@@ -18,18 +18,23 @@ const NavBar: FC = () => {
     e.preventDefault();
     if (inputValue.trim()) {
       // navigate(`/search?x=${encodeURIComponent(inputValue.trim())}`);
-      console.log(`?x=${encodeURIComponent(inputValue.trim())}`);
     }
   };
 
   return (
-    <div className={clsx([isOpen ? 'h-[122px]' : 'h-16'],
-      ['!h-16 md:h-[122px] border-b border-gray-800 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-stretch md:items-center px-[5vw] '])}>
+    <div
+      className={clsx(
+        [isOpen ? 'h-[122px]' : 'h-16'],
+        [
+          '!h-16 md:h-[122px] border-b border-gray-800 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-stretch md:items-center px-[5vw] ',
+        ]
+      )}
+    >
       <div className="flex items-center justify-between">
         <div
           className="flex items-center cursor-pointer"
           onClick={() => {
-            navigate("/");
+            navigate('/');
           }}
         >
           <img
@@ -49,7 +54,7 @@ const NavBar: FC = () => {
       </div>
 
       <form
-        className={`relative ${isOpen ? "flex" : "hidden"} sm:!flex `}
+        className={`relative ${isOpen ? 'flex' : 'hidden'} sm:!flex `}
         onSubmit={handleSubmitForm}
       >
         <input
