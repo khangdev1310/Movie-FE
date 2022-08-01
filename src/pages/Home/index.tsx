@@ -6,9 +6,7 @@ import { AppState, useAppSelector } from '../../redux/rootReducer';
 import DataTest from '../../ultils/index';
 
 const Home: FC = () => {
-  const { data, error, loading } = useAppSelector(
-    (state: AppState) => state.albums
-  );
+  const { data } = useAppSelector((state: AppState) => state.albums);
 
   const dispatch = useDispatch();
 
@@ -25,6 +23,7 @@ const Home: FC = () => {
         data={DataTest.getData()}
         type="button"
         handler={() => {
+          // eslint-disable-next-line no-console
           console.log('Test click');
         }}
       />

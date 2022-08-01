@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FaPlay } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 

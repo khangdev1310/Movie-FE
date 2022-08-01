@@ -1,6 +1,4 @@
-type Props = {};
-
-const Album = (props: Props) => {
+const Album = () => {
   return <div>Album</div>;
 };
 
