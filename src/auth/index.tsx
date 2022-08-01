@@ -1,9 +1,9 @@
-import React from "react";
-import { loginEndpoint } from "../ultils/spotify";
+import React from 'react';
+import { loginEndpoint } from '../ultils/spotify';
 
-import "./Login.scss";
+import './Login.scss';
 
-function Login(): JSX.Element {
+function Login() {
   return (
     <div className="login-page">
       <img
