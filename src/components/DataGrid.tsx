@@ -11,11 +11,12 @@ interface DataGridProps {
   }[];
   type: "link" | "button";
   handler: Function;
+  classType?: string;
 }
 
-const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
+const DataGrid: FC<DataGridProps> = ({ data, type, handler, classType }) => {
   return (
-    <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3 text-white font-bold">
+    <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3 text-white font-bold h-[100%]">
       {data.map((item) => {
         const children = (
           <>
@@ -36,10 +37,11 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
             </div>
 
             <p
-              className="mt-2 font-medium   dark:group-hover:text-purple-hover transition duration-300 text-indigo-600 dark:text-white
-              truncate
-              
-            "
+              className={
+                `mt-2 font-medium   dark:group-hover:text-purple-hover transition duration-300  dark:text-white
+              truncate 
+            ` + (classType ? classType : "text-indigo-600")
+              }
             >
               {item.title}
             </p>
@@ -55,9 +57,9 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
           return (
             <div key={item.id}>
               <Link
-                className="w-full block transition duration-300  p-2 
+                className={`w-full block transition duration-300  p-2 
                 rounded-md relative group shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-500
-                dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[280px] "
+                dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[100%]`}
                 to={handler(item.id)}
               >
                 {children}
@@ -68,8 +70,8 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
         return (
           <div key={item.id}>
             <div
-              className="w-full transition duration-300  p-2 rounded-md relative group cursor-pointer shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-700
-              dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[280px]"
+              className={`w-full transition duration-300  p-2 rounded-md relative group cursor-pointer shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-700
+              dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[100%]`}
               onClick={() => handler(item.id)}
             >
               {children}
