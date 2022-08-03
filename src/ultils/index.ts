@@ -32,12 +32,37 @@ class DataTest {
     },
   ];
 
+  private ListAlbums = [
+    {
+      id: "1",
+      image: "https://picsum.photos/id/20/200/200",
+      title: "Title 1",
+      description: "Description 1",
+    },
+    {
+      id: "2",
+      image: "https://picsum.photos/id/10/200/200",
+      title: "Title 2",
+      description: "Description 2",
+    },
+    {
+      id: "3",
+      image: "https://picsum.photos/id/11/200/200",
+      title: "Title 3",
+      description: "Description 3",
+    },
+  ];
+
   getData() {
     return this.ListItems;
   }
 
   getCategories() {
     return this.ListCategories;
+  }
+
+  getReleases() {
+    return this.ListAlbums;
   }
 }
 
