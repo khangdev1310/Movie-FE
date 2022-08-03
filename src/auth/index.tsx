@@ -1,4 +1,3 @@
-import React from 'react';
 import { loginEndpoint } from '../ultils/spotify';
 
 import './Login.scss';

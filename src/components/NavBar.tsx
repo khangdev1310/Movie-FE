@@ -1,8 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdCancel } from 'react-icons/md';
-import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);

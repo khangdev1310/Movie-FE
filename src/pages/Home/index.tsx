@@ -1,18 +1,12 @@
-import { FC, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import DataGrid from '../../components/DataGrid';
 import { fetchAlbumRequest } from '../../redux/actions/albumAction';
 import { AppState, useAppSelector } from '../../redux/rootReducer';
 import DataTest from '../../ultils/index';
-import { albumReducer } from '../../redux/reducers/albumReducer';
-import { AlbumState, IAlbum, IAlbumItem } from '../../models/album.model';
-import { RootState } from '../../redux/store';
-import Loader from '../../components/Loader';
 
 const Home: FC = () => {
-  const { albums, error, loading } = useAppSelector(
-    (state: AppState) => state.album
-  );
+  const { albums } = useAppSelector((state: AppState) => state.album);
 
   const dispatch = useDispatch();
 
@@ -29,6 +23,7 @@ const Home: FC = () => {
         data={DataTest.getData()}
         type="button"
         handler={() => {
+          // eslint-disable-next-line no-console
           console.log('Test click');
         }}
       />

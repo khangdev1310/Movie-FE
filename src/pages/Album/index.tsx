@@ -1,14 +1,12 @@
-import { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchDetailedAlbumRequest } from "../../redux/actions/detailedAlbumAction";
-import { AppState, useAppSelector } from "../../redux/rootReducer";
-import { formatDuration } from "../../ultils";
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchDetailedAlbumRequest } from '../../redux/actions/detailedAlbumAction';
+import { AppState, useAppSelector } from '../../redux/rootReducer';
+import { formatDuration } from '../../ultils';
 
 const Album: FC = () => {
-  const { details, error, loading } = useAppSelector(
-    (state: AppState) => state.detailedAlbum
-  );
+  const { details } = useAppSelector((state: AppState) => state.detailedAlbum);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -45,7 +43,7 @@ const Album: FC = () => {
                     {item.name}
                   </h1>
                   <p className="text-slate-400 ">
-                    {item.artists.map((item: any) => item.name).join(", ")}
+                    {item.artists.map((item: any) => item.name).join(', ')}
                   </p>
                 </div>
               </div>
