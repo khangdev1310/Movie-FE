@@ -47,7 +47,7 @@ const GridItemLink: FC<DataType> = (item, handler) => (
       className="relative block w-full p-2 transition duration-300 rounded-md bg-dark hover:bg-dark-hovered group"
       to={handler(item.id)}
     >
-      {GridItem(item)}
+      {GridItem(item, handler)}
     </Link>
   </div>
 );
