@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import { FC, useRef } from 'react';
 
 interface VolumeProps {
   className?: string;
@@ -31,28 +31,28 @@ const Volume: FC<VolumeProps> = ({ className, width, setWidth }) => {
               setWidth(width);
             }
           };
-          window.addEventListener("mousemove", moveHandler);
+          window.addEventListener('mousemove', moveHandler);
           window.addEventListener(
-            "mouseup",
+            'mouseup',
             () => {
-              window.removeEventListener("mousemove", moveHandler);
+              window.removeEventListener('mousemove', moveHandler);
             },
             { once: true }
           );
         }
       }}
       className={`group h-4 flex justify-center items-center cursor-pointer ${
-        className || ""
+        className || ''
       }`}
     >
       <div
         className={`rounded-full h-1 group-hover:h-[6px] transition-all w-full bg-gray-600 ${
-          className || ""
+          className || ''
         }`}
       >
         <div
           style={{ width: `${width}%` }}
-          className="rounded-full h-full bg-white relative after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:translate-x-1/2 after:bg-white after:h-3 after:w-3 after:rounded-full after:scale-50 after:opacity-0 after:transition group-hover:after:opacity-100 group-hover:after:scale-100"
+          className="relative h-full bg-white rounded-full after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:translate-x-1/2 after:bg-white after:h-3 after:w-3 after:rounded-full after:scale-50 after:opacity-0 after:transition group-hover:after:opacity-100 group-hover:after:scale-100"
         ></div>
       </div>
     </div>
