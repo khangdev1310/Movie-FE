@@ -1,17 +1,17 @@
 import { AlbumActions, AlbumState } from "../../models/album.model";
 import {
-  FETCH_ALBUM_FAILURE,
   FETCH_ALBUM_REQUEST,
   FETCH_ALBUM_SUCCESS,
-} from "../types/albumTypes";
+  FETCH_ALBUM_FAILURE,
+} from '../types/albumTypes';
 
 const initialState: AlbumState = {
-  albums: {
+  data: {
     albums: {
-      href: "",
+      href: '',
       items: [],
       limit: 0,
-      next: "",
+      next: '',
       offset: 0,
       previous: null,
       total: 0,
@@ -35,9 +35,7 @@ export const albumReducer = (
     case FETCH_ALBUM_SUCCESS:
       return {
         ...state,
-        albums: action.payload.data,
-        loading: false,
-        error: null,
+        data: action.payload.data,
       };
     case FETCH_ALBUM_FAILURE:
       return {

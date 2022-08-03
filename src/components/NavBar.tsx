@@ -40,7 +40,7 @@ const NavBar: FC = () => {
           />
           <h1 className="text-xl">Music</h1>
         </div>
-        <button className="hidden md:block" onClick={handleOpen}>
+        <button className="md:hidden" onClick={handleOpen}>
           {isOpen ? (
             <MdCancel className="w-6 h-6 font-extrabold" />
           ) : (

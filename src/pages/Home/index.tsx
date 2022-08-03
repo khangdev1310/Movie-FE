@@ -6,7 +6,7 @@ import { AppState, useAppSelector } from '../../redux/rootReducer';
 import DataTest from '../../ultils/index';
 
 const Home: FC = () => {
-  const { albums } = useAppSelector((state: AppState) => state.album);
+  const { data } = useAppSelector((state: AppState) => state.albums);
 
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const Home: FC = () => {
 
       <h1 className="mt-4 mb-3 text-2xl">New Releases</h1>
       <DataGrid
-        data={albums?.albums?.items
+        data={data?.albums?.items
           ?.filter((track: any) => track.name)
           ?.map((item: any) => {
             return {
