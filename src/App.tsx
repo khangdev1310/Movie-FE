@@ -43,7 +43,7 @@ const App: FC = () => {
     <Login />
   ) : (
     <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">
-      <div className="min-h-full text-black font-bold dark:text-white ">
+      <div className="min-h-[100vh] text-black font-bold dark:text-white ">
         <NavBar />
         <Routes>
           <Route

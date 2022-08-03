@@ -23,7 +23,7 @@ const Album: FC<AlbumProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
   }, []);
 
   return (
-    <div className="mx-[5vw] my-10 flex flex-col md:flex-row items-start gap-10 h-[100vh]">
+    <div className="mx-[5vw] my-10 flex flex-col md:flex-row items-start gap-10 h-[100%]">
       <div className="flex-shrink-0 md:sticky top-10 flex flex-col items-center w-full md:w-auto">
         <img
           className="w-[350px] h-[350px] object-cover"
