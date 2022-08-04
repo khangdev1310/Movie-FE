@@ -32,14 +32,18 @@ const Home: FC = () => {
       <DataGrid
         data={data?.albums?.items
           ?.filter((track: any) => track.name)
-          ?.map((item: any) => ({
-            id: item.id,
-            title: item.name,
-            image: item.images[0].url,
-            description: item.artists[0].name,
-          }))}
+          ?.map((item: any) => {
+            return {
+              id: item.id,
+              title: item.name,
+              image: item.images[0]?.url,
+              description: item.artists
+                ?.map((item: any) => item?.name)
+                ?.join(', '),
+            };
+          })}
         type="link"
-        handler={(id: string) => `/album/${id}}`}
+        handler={(id: string) => `album/` + id}
       />
 
       <h1 className="mt-4 mb-3 text-2xl">Categories</h1>

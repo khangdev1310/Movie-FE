@@ -1,4 +1,4 @@
-import { AlbumActions, AlbumState } from '../../models/album.model';
+import { AlbumActions, AlbumState } from "../../models/album.model";
 import {
   FETCH_ALBUM_REQUEST,
   FETCH_ALBUM_SUCCESS,
