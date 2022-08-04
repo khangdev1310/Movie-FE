@@ -39,7 +39,9 @@ const App: FC = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  return !token ? (
+
+
+  return token === null ? (
     <Login />
   ) : (
     <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">

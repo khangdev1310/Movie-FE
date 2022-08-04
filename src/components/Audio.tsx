@@ -1,4 +1,8 @@
-import { FC, Fragment, useEffect, useMemo, useRef, useState } from "react";
+import {
+  FC,
+  Fragment, useEffect, useRef,
+  useState
+} from "react";
 import { FaPlay } from "react-icons/fa";
 import { IoMdPause } from "react-icons/io";
 import { MdRepeat, MdVolumeOff, MdVolumeUp } from "react-icons/md";
@@ -7,7 +11,7 @@ import { Link } from "react-router-dom";
 import { fetchAudioRequest } from "../redux/actions/audioAction";
 import { AppState, useAppDispatch, useAppSelector } from "../redux/rootReducer";
 import { formatDuration } from "../ultils";
-import useAudio from "./useAudio";
+import Spinner from "./Spinner";
 import Volume from "./Volume";
 
 type AudioProps = {
@@ -78,6 +82,8 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
     dispatch(fetchAudioRequest(playerId));
     setIsPaused(true);
   }, [playerId]);
+
+  
 
   return (
     <>
@@ -151,6 +157,8 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
             >
               {isError ? (
                 <span className="text-red-500">{`!`}</span>
+              ) : loading ? (
+                <Spinner />
               ) : isPaused ? (
                 <FaPlay className="fill-white w-3 h-3 group-hover:fill-purple-hover" />
               ) : (

@@ -59,7 +59,7 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler, classType }) => {
               <Link
                 className={`w-full block transition duration-300  p-2 
                 rounded-md relative group shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-500
-                dark:from-dark dark:to-dark dark:hover:bg-dark-hovered`}
+                dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[100%]`}
                 to={handler(item.id)}
               >
                 {children}
@@ -71,7 +71,7 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler, classType }) => {
           <div key={item.id}>
             <div
               className={`w-full transition duration-300  p-2 rounded-md relative group cursor-pointer shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-700
-              dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[280px]`}
+              dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[100%]`}
               onClick={() => handler(item.id)}
             >
               {children}
