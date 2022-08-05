@@ -4,6 +4,28 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import useDarkMode from "./DarkMode";
 import { BsSunFill, BsFillMoonFill } from "react-icons/bs";
+import styled from "styled-components";
+
+const StyledImg = styled.img`
+  width: 48px;
+  height: 48px;
+  justify-content: space-between;
+  transform: rotate(45deg);
+`;
+
+const StyleInput = styled.input`
+  width: 100%;
+  background: black;
+  border: 1px solid rgb(75 85 99 / var(--tw-border-opacity));
+  border-radius: 9999px;
+  padding: 8px 40px 8px 12px;
+  outline: none;
+  transition: all 0.3s;
+  color: white;
+  @media (min-width: 768px) {
+    width: 15rem;
+  }
+`;
 
 const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,11 +63,7 @@ const NavBar: FC = () => {
             navigate("/");
           }}
         >
-          <img
-            className="w-12 h-12 rotate-45 justify-between"
-            src="/music1.png"
-            alt="music"
-          />
+          <StyledImg src="/music1.png" alt="music" />
 
           <h1 className="text-xl">Music</h1>
           {theme ? (
@@ -75,17 +93,15 @@ const NavBar: FC = () => {
         className={`relative ${isOpen ? "flex" : "hidden"} sm:!flex `}
         onSubmit={handleSubmitForm}
       >
-        <input
+        <StyleInput
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => e.stopPropagation()}
           onKeyUp={(e) => e.stopPropagation()}
-          className="bg-dark border border-gray-600 rounded-full 
-          w-full px-3 py-2 outline-none md:w-60 duration-300 dark:hover:border-purple-hover pr-[40px]
-          text-white
-		  "
+          className="dark:hover:border-purple-hover "
         />
+
         <button className="absolute right-2 top-1/2 -translate-y-1/2">
           <AiOutlineSearch className="w-6 h-6 fill-white" />
         </button>
