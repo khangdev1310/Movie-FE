@@ -1,9 +1,12 @@
 import { FC, useEffect, useState } from "react";
+import { ErrorBoundary, withErrorBoundary } from "react-error-boundary";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "./auth";
 import Audio from "./components/Audio";
+import ErrorBoundaryFallback from "./components/ErrorBoundaryFallback";
 
 import NavBar from "./components/NavBar";
+import { TestErrorBoundary } from "./components/TestErrorBoundary";
 import useAudio from "./components/useAudio";
 import Album from "./pages/Album";
 import Artist from "./pages/Artist";
@@ -12,7 +15,7 @@ import Home from "./pages/Home";
 import Playlist from "./pages/Playlist";
 import Search from "./pages/Search";
 
-const App: FC = () => {
+const App = () => {
   const [token, setToken] = useState<string | null>("");
   const { playerId, setPlayerId, setIsPlayerIdChanged } = useAudio();
 
@@ -38,8 +41,6 @@ const App: FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
-
 
   return token === null ? (
     <Login />
@@ -86,10 +87,16 @@ const App: FC = () => {
             element={<Playlist setPlayerId={setPlayerId} />}
           />
         </Routes>
+        {/* <TestErrorBoundary /> */}
       </div>
       {playerId && <Audio playerId={playerId} />}
     </div>
   );
 };
+
+
+export const AppErrorBoundary = withErrorBoundary(App, {
+  FallbackComponent: ErrorBoundaryFallback,
+});
 
 export default App;

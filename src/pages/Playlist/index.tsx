@@ -32,8 +32,8 @@ const Playlist: FC<PlaylistProps> = ({setPlayerId}) => {
           src={data.images?.[0]?.url}
           alt=""
         />
-        <h1 className="text-center text-2xl font-semibold my-3">{data.name}</h1>
-        <div className="flex flex-wrap justify-center text-gray-400">
+        <h1 className="text-center text-2xl font-semibold my-3 ">{data.name}</h1>
+        <div className="flex flex-wrap justify-center text-indigo-600  dark:text-gray-400 ">
           {data.owner.display_name}
         </div>
       </div>
@@ -55,7 +55,7 @@ const Playlist: FC<PlaylistProps> = ({setPlayerId}) => {
                   {index + 1}
                 </div>
                 <div>
-                  <h1 className="font-medium">{track.name}</h1>
+                  <h1 className="font-medium text-white ">{track.name}</h1>
                   <p className="text-slate-400">
                     {(track as any).artists
                       .map((artist: any) => artist.name)
