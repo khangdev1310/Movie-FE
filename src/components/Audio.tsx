@@ -1,8 +1,4 @@
-import {
-  FC,
-  Fragment, useEffect, useRef,
-  useState
-} from "react";
+import { FC, Fragment, useEffect, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { IoMdPause } from "react-icons/io";
 import { MdRepeat, MdVolumeOff, MdVolumeUp } from "react-icons/md";
@@ -41,7 +37,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
   const [isPaused, setIsPaused] = useState(false);
 
-  const isError = false;
+  const isError = error;
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Effect
@@ -83,7 +79,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
     setIsPaused(true);
   }, [playerId]);
 
-  
+ 
 
   return (
     <>
@@ -138,6 +134,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
             <button
               title={isLoop ? "Disable repeat" : "Enable repeat"}
               onClick={() => setIsLoop(!isLoop)}
+              disabled={!!isError || loading}
             >
               <MdRepeat
                 className={`${
@@ -150,10 +147,11 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
             <button
               title={isError ? "Error" : isPaused ? "Play" : "Pause"}
-              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200${
+              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200 ${
                 isError ? "border-red-500" : ""
               } ${isPaused ? "" : "border-purple-hover"}`}
               onClick={() => setIsPaused((prev) => !prev)}
+              disabled={!!error || loading}
             >
               {isError ? (
                 <span className="text-red-500">{`!`}</span>
@@ -171,6 +169,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
               href="https://open.spotify.com/track/02Vb9vfZUmqAKNhQwFjPSZ"
               target="_blank"
               rel="noopener noreferrer"
+              className={loading || isError ? "pointer-events-none" : ""}
             >
               <RiExternalLinkLine className="fill-white w-5 h-5 hover:fill-purple-hover duration-200 transition" />
             </a>
