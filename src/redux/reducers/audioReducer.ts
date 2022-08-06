@@ -42,8 +42,6 @@ export const audioReducer = (
       };
 
     case FETCH_AUDIO_SUCCESS:
-      
-
       return {
         ...state,
         audio: action.payload.data,

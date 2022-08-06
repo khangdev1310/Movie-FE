@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Login from './auth';
 import Audio from './components/Audio';
 
 import NavBar from './components/NavBar';
 import useAudio from './components/useAudio';
 import Album from './pages/Album';
+import Category from './pages/Category';
 import Home from './pages/Home';
 
 const App: FC = () => {
@@ -29,6 +30,12 @@ const App: FC = () => {
     localStorage.setItem('minizing-playing', playerId);
   }, [playerId]);
 
+  // Scroll to Top
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return !token ? (
     <Login />
   ) : (
@@ -36,7 +43,15 @@ const App: FC = () => {
       <div className="min-h-full">
         <NavBar />
         <Routes>
-          <Route index element={<Home />} />
+          <Route
+            index
+            element={
+              <Home
+                setPlayerId={setPlayerId}
+                setIsPlayerIdChanged={setIsPlayerIdChanged}
+              />
+            }
+          />
           <Route
             path="album/:id"
             element={
@@ -46,6 +61,7 @@ const App: FC = () => {
               />
             }
           />
+          <Route path="category/:id" element={<Category />} />
         </Routes>
       </div>
       {playerId && <Audio playerId={playerId} />}
