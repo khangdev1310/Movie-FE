@@ -4,10 +4,10 @@ import {
   compose,
   Store,
   Middleware,
-} from "redux";
-import createSagaMiddleware from "redux-saga";
-import rootReducer from "./rootReducer";
-import { rootSaga } from "./sagas/rootSaga";
+} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './rootReducer';
+import { rootSaga } from './sagas/rootSaga';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
