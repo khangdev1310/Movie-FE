@@ -1,10 +1,9 @@
-import React, { FC, useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import DataGrid from "../../components/DataGrid";
-import { fetchSearchRequest } from "../../redux/actions/searchAction";
-import { useAppSelector } from "../../redux/rootReducer";
-import { formatNumber } from "../../ultils";
+import { FC, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import DataGrid from '../../components/DataGrid';
+import { fetchSearchRequest } from '../../redux/actions/searchAction';
+import { useAppSelector } from '../../redux/rootReducer';
 
 type SearchProps = {
   setPlayerId: Function;
@@ -12,7 +11,7 @@ type SearchProps = {
 };
 
 const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
-  const { data, loading, error } = useAppSelector((state) => state.search);
+  const { data } = useAppSelector((state) => state.search);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -21,7 +20,6 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
     () => Object.fromEntries(new URLSearchParams(location.search)),
     [location.search]
   );
-
 
   useEffect(() => {
     dispatch(fetchSearchRequest(q));
@@ -38,22 +36,21 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
         handler={(id: string) => `/artist/${id}`}
         data={
           data.artists?.items
-            .filter((artist) => artist.name)
-            .map((artist) => {
+            .filter((artist: any) => artist.name)
+            .map((artist: any) => {
               if (artist.images.length > 0) {
                 return {
                   id: artist?.id,
                   image: artist?.images[0]?.url,
                   title: artist?.name,
-                  description: artist?.genres.join(", "),
+                  description: artist?.genres.join(', '),
                 };
-              }
-              else {
+              } else {
                 return {
                   id: artist?.id,
-                  image: "https://via.placeholder.com/150",
+                  image: 'https://via.placeholder.com/150',
                   title: artist?.name,
-                  description: artist?.genres.join(", "),
+                  description: artist?.genres.join(', '),
                 };
               }
             }) as any
@@ -70,14 +67,14 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
         }}
         data={
           data.tracks?.items
-            ?.filter((track) => track.name)
-            .map((track) => ({
+            ?.filter((track: any) => track.name)
+            .map((track: any) => ({
               id: track.id,
               image: (track as any)?.album?.images?.[0]?.url,
               title: track.name,
               description: track?.artists
-                .map((artist) => artist.name)
-                .join(", "),
+                .map((artist: any) => artist.name)
+                .join(', '),
             })) as any
         }
       />
@@ -89,14 +86,14 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
         handler={(id: string) => `/album/${id}`}
         data={
           data.albums?.items
-            .filter((album) => album.name)
-            .map((album) => ({
+            .filter((album: any) => album.name)
+            .map((album: any) => ({
               id: album.id,
               image: album?.images?.[0]?.url,
               title: album.name,
               description: (album as any)?.artists
                 ?.map((artist: any) => artist?.name)
-                ?.join(", "),
+                ?.join(', '),
             })) as any
         }
       />

@@ -1,17 +1,17 @@
 import {
   CategoryPlaylistsActions,
   CategoryPlaylistsState,
-} from "../../models/category-playlist.model";
+} from '../../models/category-playlist.model';
 import {
   FETCH_CATEGORY_PLAYLIST_FAILURE,
   FETCH_CATEGORY_PLAYLIST_REQUEST,
   FETCH_CATEGORY_PLAYLIST_SUCCESS,
-} from "../types/categoryType";
+} from '../types/categoryType';
 
 const initialState: CategoryPlaylistsState = {
   data: {
     playlists: {
-      href: "",
+      href: '',
       items: [],
       limit: 0,
       next: null,
