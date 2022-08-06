@@ -1,12 +1,12 @@
-import { AxiosResponse } from "axios";
-import { all, call, put, takeLatest } from "redux-saga/effects";
-import { FetchAudioRequest, ITrack, Root } from "../../models/audio.model";
-import axiosClient from "../../services/axios";
-import { fetchAudioFailure, fetchAudioSuccess } from "../actions/audioAction";
-import { FETCH_AUDIO_REQUEST } from "../types/audioTypes";
+import { AxiosResponse } from 'axios';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { FetchAudioRequest, Root } from '../../models/audio.model';
+import axiosClient from '../../services/axios';
+import { fetchAudioFailure, fetchAudioSuccess } from '../actions/audioAction';
+import { FETCH_AUDIO_REQUEST } from '../types/audioTypes';
 
 const getAudio = (id: string) => {
-  return axiosClient.get("/tracks", {
+  return axiosClient.get('/tracks', {
     params: {
       ids: id,
     },

@@ -42,7 +42,7 @@ export const audioReducer = (
       };
 
     case FETCH_AUDIO_SUCCESS:
-      console.log(action.payload.data);
+      
 
       return {
         ...state,
