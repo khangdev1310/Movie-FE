@@ -44,6 +44,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
         setIsPaused((prev) => !prev);
       }
     };
+
     const spacePressedHandler = (e: KeyboardEvent) => {
       if (e.key === ' ') e.preventDefault();
     };

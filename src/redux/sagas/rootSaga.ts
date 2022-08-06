@@ -1,5 +1,6 @@
 import { all, fork } from "redux-saga/effects";
 import albumSaga from "./albumSaga";
+import watchAll from "./artistSaga";
 import audioSaga from "./audioSaga";
 import categorySaga, { categoryPlaylistsSaga } from "./categorySaga";
 import detailedAlbumSaga from "./detailedAlbumSaga";
@@ -13,5 +14,6 @@ export function* rootSaga() {
     fork(categorySaga),
     fork(categoryPlaylistsSaga),
     fork(searchSaga),
+    fork(watchAll),
   ]);
 }

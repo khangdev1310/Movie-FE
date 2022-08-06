@@ -23,11 +23,39 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
 
   useEffect(() => {
     dispatch(fetchSearchRequest(q));
-  }, []);
+  }, [q]);
 
   return (
     <div className="mx-[5vw] mb-5">
       <h1 className="text-3xl mt-5">Search result for: {q}</h1>
+
+      <h1 className="mt-5 mb-2 text-2xl">Artists</h1>
+
+      <DataGrid
+        type="link"
+        handler={(id: string) => `/artist/${id}`}
+        data={
+          data.artists?.items
+            .filter((artist: any) => artist.name)
+            .map((artist: any) => {
+              if (artist.images.length > 0) {
+                return {
+                  id: artist?.id,
+                  image: artist?.images[0]?.url,
+                  title: artist?.name,
+                  description: artist?.genres.join(', '),
+                };
+              } else {
+                return {
+                  id: artist?.id,
+                  image: 'https://via.placeholder.com/150',
+                  title: artist?.name,
+                  description: artist?.genres.join(', '),
+                };
+              }
+            }) as any
+        }
+      />
 
       <h1 className="mt-5 mb-2 text-2xl">Tracks</h1>
 
