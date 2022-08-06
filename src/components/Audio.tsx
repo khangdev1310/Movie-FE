@@ -1,14 +1,13 @@
-import { FC, Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { FaPlay } from "react-icons/fa";
-import { IoMdPause } from "react-icons/io";
-import { MdRepeat, MdVolumeOff, MdVolumeUp } from "react-icons/md";
-import { RiExternalLinkLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
-import { fetchAudioRequest } from "../redux/actions/audioAction";
-import { AppState, useAppDispatch, useAppSelector } from "../redux/rootReducer";
-import { formatDuration } from "../ultils";
-import useAudio from "./useAudio";
-import Volume from "./Volume";
+import { FC, Fragment, useEffect, useRef, useState } from 'react';
+import { FaPlay } from 'react-icons/fa';
+import { IoMdPause } from 'react-icons/io';
+import { MdRepeat, MdVolumeOff, MdVolumeUp } from 'react-icons/md';
+import { RiExternalLinkLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
+import { fetchAudioRequest } from '../redux/actions/audioAction';
+import { AppState, useAppDispatch, useAppSelector } from '../redux/rootReducer';
+import { formatDuration } from '../ultils';
+import Volume from './Volume';
 
 type AudioProps = {
   playerId: string;
@@ -16,9 +15,7 @@ type AudioProps = {
 
 const Audio: FC<AudioProps> = ({ playerId }) => {
   // get audio from store
-  const { audio, loading, error } = useAppSelector(
-    (state: AppState) => state.audio
-  );
+  const { audio } = useAppSelector((state: AppState) => state.audio);
 
   //Get id when change tracks
 
@@ -27,10 +24,10 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
   // State for audio
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(
-    Number(localStorage.getItem("music-volume") || 1)
+    Number(localStorage.getItem('music-volume') || 1)
   );
   const [isMuted, setIsMuted] = useState(
-    Number(localStorage.getItem("music-muted")) || false
+    Number(localStorage.getItem('music-muted')) || false
   );
   const [duration, setDuration] = useState(0);
   const [isLoop, setIsLoop] = useState(false);
@@ -43,20 +40,20 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
   // Effect
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === " ") {
+      if (e.key === ' ') {
         setIsPaused((prev) => !prev);
       }
     };
     const spacePressedHandler = (e: KeyboardEvent) => {
-      if (e.key === " ") e.preventDefault();
+      if (e.key === ' ') e.preventDefault();
     };
 
-    window.addEventListener("keyup", handler);
-    window.addEventListener("keydown", spacePressedHandler);
+    window.addEventListener('keyup', handler);
+    window.addEventListener('keydown', spacePressedHandler);
 
     return () => {
-      window.removeEventListener("keyup", handler);
-      window.removeEventListener("keydown", spacePressedHandler);
+      window.removeEventListener('keyup', handler);
+      window.removeEventListener('keydown', spacePressedHandler);
     };
   }, []);
 
@@ -69,8 +66,8 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
     if (audioRef.current) {
       audioRef.current.volume = isMuted ? 0 : volume;
     }
-    localStorage.setItem("music-volume", JSON.stringify(volume));
-    localStorage.setItem("music-muted", JSON.stringify(+isMuted));
+    localStorage.setItem('music-volume', JSON.stringify(volume));
+    localStorage.setItem('music-muted', JSON.stringify(+isMuted));
   }, [isMuted, volume]);
 
   useEffect(() => {
@@ -126,34 +123,34 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center flex-col flex-1">
-          <div className="flex justify-center items-center gap-5">
+        <div className="flex flex-col items-center justify-center flex-1">
+          <div className="flex items-center justify-center gap-5">
             <button
-              title={isLoop ? "Disable repeat" : "Enable repeat"}
+              title={isLoop ? 'Disable repeat' : 'Enable repeat'}
               onClick={() => setIsLoop(!isLoop)}
             >
               <MdRepeat
                 className={`${
                   isLoop
-                    ? "fill-purple-hover"
-                    : "fill-white hover:fill-purple-hover"
+                    ? 'fill-purple-hover'
+                    : 'fill-white hover:fill-purple-hover'
                 } w-5 h-5 transition duration-200`}
               />
             </button>
 
             <button
-              title={isError ? "Error" : isPaused ? "Play" : "Pause"}
+              title={isError ? 'Error' : isPaused ? 'Play' : 'Pause'}
               className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200${
-                isError ? "border-red-500" : ""
-              } ${isPaused ? "" : "border-purple-hover"}`}
+                isError ? 'border-red-500' : ''
+              } ${isPaused ? '' : 'border-purple-hover'}`}
               onClick={() => setIsPaused((prev) => !prev)}
             >
               {isError ? (
                 <span className="text-red-500">{`!`}</span>
               ) : isPaused ? (
-                <FaPlay className="fill-white w-3 h-3 group-hover:fill-purple-hover" />
+                <FaPlay className="w-3 h-3 fill-white group-hover:fill-purple-hover" />
               ) : (
-                <IoMdPause className="fill-purple-hover w-3 h-3 group-hover:fill-white" />
+                <IoMdPause className="w-3 h-3 fill-purple-hover group-hover:fill-white" />
               )}
             </button>
 
@@ -163,18 +160,18 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <RiExternalLinkLine className="fill-white w-5 h-5 hover:fill-purple-hover duration-200 transition" />
+              <RiExternalLinkLine className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
             </a>
           </div>
 
-          <div className="hidden md:flex justify-center items-center gap-4 text-sm w-full">
+          <div className="items-center justify-center hidden w-full gap-4 text-sm md:flex">
             <span className="flex-shrink-0">
               {formatDuration(currentTime * 1000)}
             </span>
 
             <Volume
               className="flex-grow max-w-[400px]"
-              width={duration != 0 ? (currentTime / duration) * 100 : 0}
+              width={duration !== 0 ? (currentTime / duration) * 100 : 0}
               setWidth={(val: number) => {
                 setCurrentTime((val / 100) * duration);
                 if (audioRef.current) {
@@ -188,9 +185,9 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
           </div>
         </div>
 
-        <div className="flex flex-1 justify-end items-center gap-3">
+        <div className="flex items-center justify-end flex-1 gap-3">
           <button
-            title={isMuted || volume === 0 ? "Unmute" : "Mute"}
+            title={isMuted || volume === 0 ? 'Unmute' : 'Mute'}
             onClick={() => {
               if (volume === 0) {
                 setVolume(1);
@@ -201,9 +198,9 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
             }}
           >
             {isMuted || volume === 0 ? (
-              <MdVolumeOff className="fill-white w-5 h-5 hover:fill-purple-hover transition duration-200" />
+              <MdVolumeOff className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
             ) : (
-              <MdVolumeUp className="fill-white w-5 h-5 hover:fill-purple-hover transition duration-200" />
+              <MdVolumeUp className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
             )}
           </button>
           <div className="hidden md:block">

@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
-
-interface IUseAudio {
-  playerId: string;
-  setPlayerId: Function;
-  isPlayerIdChanged: boolean;
-  setIsPlayerIdChanged: Function;
-}
+import { useState } from 'react';
 
 const useAudio = () => {
   const [isPlayerIdChanged, setIsPlayerIdChanged] = useState(false);
   const [playerId, setPlayerId] = useState(
-    localStorage.getItem("minizing-playing") || ""
+    localStorage.getItem('minizing-playing') || ''
   );
-
-    
 
   return {
     playerId,

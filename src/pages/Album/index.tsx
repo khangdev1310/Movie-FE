@@ -1,11 +1,9 @@
-import { FC, Fragment, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import useAudio from "../../components/useAudio";
-import { fetchDetailedAlbumRequest } from "../../redux/actions/detailedAlbumAction";
-import { AppState, useAppSelector } from "../../redux/rootReducer";
-import { formatDuration } from "../../ultils";
+import { FC, Fragment, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { fetchDetailedAlbumRequest } from '../../redux/actions/detailedAlbumAction';
+import { AppState, useAppSelector } from '../../redux/rootReducer';
+import { formatDuration } from '../../ultils';
 
 type AlbumProps = {
   setPlayerId: Function;
@@ -13,9 +11,7 @@ type AlbumProps = {
 };
 
 const Album: FC<AlbumProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
-  const { details, error, loading } = useAppSelector(
-    (state: AppState) => state.detailedAlbum
-  );
+  const { details } = useAppSelector((state: AppState) => state.detailedAlbum);
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -66,7 +62,7 @@ const Album: FC<AlbumProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
                     {item.name}
                   </h1>
                   <p className="text-slate-400 ">
-                    {item.artists.map((item: any) => item.name).join(", ")}
+                    {item.artists.map((item: any) => item.name).join(', ')}
                   </p>
                 </div>
               </div>

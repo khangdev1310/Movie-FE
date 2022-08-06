@@ -1,18 +1,12 @@
-import { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import DataGrid from "../../components/DataGrid";
-import { fetchAlbumRequest } from "../../redux/actions/albumAction";
-import { AppState, useAppSelector } from "../../redux/rootReducer";
-import DataTest from "../../ultils/index";
-import { albumReducer } from "../../redux/reducers/albumReducer";
-import { AlbumState, IAlbum, IAlbumItem } from "../../models/album.model";
-import { RootState } from "../../redux/store";
-import Loader from "../../components/Loader";
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import DataGrid from '../../components/DataGrid';
+import { fetchAlbumRequest } from '../../redux/actions/albumAction';
+import { AppState, useAppSelector } from '../../redux/rootReducer';
+import DataTest from '../../ultils/index';
 
 const Home: FC = () => {
-  const { albums, error, loading } = useAppSelector(
-    (state: AppState) => state.album
-  );
+  const { data } = useAppSelector((state: AppState) => state.albums);
 
   const dispatch = useDispatch();
 
@@ -29,13 +23,14 @@ const Home: FC = () => {
         data={DataTest.getData()}
         type="button"
         handler={() => {
-          console.log("Test click");
+          // eslint-disable-next-line no-console
+          console.log('Test click');
         }}
       />
 
       <h1 className="mt-4 mb-3 text-2xl">New Releases</h1>
       <DataGrid
-        data={albums?.albums?.items
+        data={data?.albums?.items
           ?.filter((track: any) => track.name)
           ?.map((item: any) => {
             return {
@@ -44,7 +39,7 @@ const Home: FC = () => {
               image: item.images[0]?.url,
               description: item.artists
                 ?.map((item: any) => item?.name)
-                ?.join(", "),
+                ?.join(', '),
             };
           })}
         type="link"
