@@ -1,10 +1,10 @@
-import { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import DataGrid from "../../components/DataGrid";
-import { fetchAlbumRequest } from "../../redux/actions/albumAction";
-import { fetchCategoryRequest } from "../../redux/actions/categoryAction";
-import { AppState, useAppSelector } from "../../redux/rootReducer";
-import DataTest from "../../ultils/index";
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import DataGrid from '../../components/DataGrid';
+import { fetchAlbumRequest } from '../../redux/actions/albumAction';
+import { fetchCategoryRequest } from '../../redux/actions/categoryAction';
+import { AppState, useAppSelector } from '../../redux/rootReducer';
+import DataTest from '../../ultils/index';
 
 type HomeProps = {
   setPlayerId: Function;
@@ -12,11 +12,9 @@ type HomeProps = {
 };
 
 const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
-  const { albums, error, loading } = useAppSelector(
-    (state: AppState) => state.album
-  );
+  const { data } = useAppSelector((state: AppState) => state.albums);
 
-  const { data } = useAppSelector((state: AppState) => state.category);
+  const { dataCategory } = useAppSelector((state: AppState) => state.category);
 
   const dispatch = useDispatch();
 
@@ -41,7 +39,7 @@ const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
 
       <h1 className="mt-4 mb-3 text-2xl">New Releases</h1>
       <DataGrid
-        data={albums?.albums?.items
+        data={data?.albums?.items
           ?.filter((track: any) => track.name)
           ?.map((item: any) => {
             return {
@@ -50,7 +48,7 @@ const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
               image: item.images[0]?.url,
               description: item.artists
                 ?.map((item: any) => item?.name)
-                ?.join(", "),
+                ?.join(', '),
             };
           })}
         type="link"
@@ -59,7 +57,7 @@ const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
 
       <h1 className="mt-4 mb-3 text-2xl">Categories</h1>
       <DataGrid
-        data={data?.categories?.items.map((item: any) => {
+        data={dataCategory?.categories?.items.map((item: any) => {
           return {
             id: item.id,
             title: item.name,

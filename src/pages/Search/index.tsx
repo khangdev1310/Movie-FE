@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import DataGrid from "../../components/DataGrid";
-import { fetchSearchRequest } from "../../redux/actions/searchAction";
-import { useAppSelector } from "../../redux/rootReducer";
+import { FC, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import DataGrid from '../../components/DataGrid';
+import { fetchSearchRequest } from '../../redux/actions/searchAction';
+import { useAppSelector } from '../../redux/rootReducer';
 
 type SearchProps = {
   setPlayerId: Function;
@@ -11,7 +11,7 @@ type SearchProps = {
 };
 
 const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
-  const { data, loading, error } = useAppSelector((state) => state.search);
+  const { data } = useAppSelector((state) => state.search);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -20,8 +20,6 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
     () => Object.fromEntries(new URLSearchParams(location.search)),
     [location.search]
   );
-
-  console.log(data);
 
   useEffect(() => {
     dispatch(fetchSearchRequest(q));
@@ -41,14 +39,14 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
         }}
         data={
           data.tracks?.items
-            ?.filter((track) => track.name)
-            .map((track) => ({
+            ?.filter((track: any) => track.name)
+            .map((track: any) => ({
               id: track.id,
               image: (track as any)?.album?.images?.[0]?.url,
               title: track.name,
               description: track?.artists
-                .map((artist) => artist.name)
-                .join(", "),
+                .map((artist: any) => artist.name)
+                .join(', '),
             })) as any
         }
       />
@@ -60,14 +58,14 @@ const Search: FC<SearchProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
         handler={(id: string) => `/album/${id}`}
         data={
           data.albums?.items
-            .filter((album) => album.name)
-            .map((album) => ({
+            .filter((album: any) => album.name)
+            .map((album: any) => ({
               id: album.id,
               image: album?.images?.[0]?.url,
               title: album.name,
               description: (album as any)?.artists
                 ?.map((artist: any) => artist?.name)
-                ?.join(", "),
+                ?.join(', '),
             })) as any
         }
       />
