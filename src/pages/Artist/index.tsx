@@ -37,9 +37,7 @@ const Artist: FC<ArtistProps> = ({ setPlayerId }) => {
       dispatch(fetchArtistAlbumsRequest(id));
       dispatch(fetchArtistRelatedRequest(id));
     }
-  }, []);
-
-  
+  }, [id]);
 
   return (
     <div className="mx-[5vw] mb-5">

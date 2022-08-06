@@ -1,18 +1,116 @@
-import React from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 import { loginEndpoint } from "../ultils/spotify";
-
+import Typewriter from "typewriter-effect";
+import { Container } from "tsparticles-engine";
 import "./Login.scss";
 
-function Login(): JSX.Element {
+function Login() {
+  const particlesInit = async (main: any) => {
+    console.log(main);
+    await loadFull(main);
+  };
+
+  const particlesLoaded = async (container: Container | undefined) => {
+    console.log(container);
+  };
   return (
     <div className="login-page">
-      <img
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={{
+          background: {
+            color: {
+              value: "#000",
+            },
+          },
+          fpsLimit: 120,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+              resize: true,
+            },
+            modes: {
+              push: {
+                quantity: 4,
+              },
+              repulse: {
+                distance: 200,
+                duration: 0.4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: "#ffffff",
+            },
+            links: {
+              color: "#ffffff",
+              distance: 150,
+              enable: true,
+              opacity: 0.5,
+              width: 1,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: false,
+              speed: 6,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 80,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: { min: 1, max: 5 },
+            },
+          },
+          detectRetina: true,
+        }}
+      />
+      {/* <img
         src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
         alt="logo-spotify"
-        className="logo"
+        className="logo z-10"
+      /> */}
+      <Typewriter
+        onInit={(typewriter) => {
+          typewriter
+            .typeString("Welcome to <strong>MiniMusic</strong>")
+            .pauseFor(1000)
+            .deleteAll()
+            .typeString("Please login to continue to the next page.")
+            .start();
+        }}
       />
-      <a href={loginEndpoint}>
-        <div className="login-btn">LOG IN</div>
+      <a href={loginEndpoint} className="login-link z-10">
+        <span className="login-btn">LOG IN</span>
+        <i></i>
       </a>
     </div>
   );
