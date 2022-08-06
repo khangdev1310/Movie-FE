@@ -1,6 +1,4 @@
-import React, { FC } from "react";
-import { withErrorBoundary } from "react-error-boundary";
-import App from "../App";
+import { FC } from 'react';
 type IProps = {
   error: Error;
   resetErrorBoundary: () => void;
@@ -15,6 +13,5 @@ const ErrorBoundaryFallback: FC<IProps> = ({ error, resetErrorBoundary }) => {
     </div>
   );
 };
-
 
 export default ErrorBoundaryFallback;

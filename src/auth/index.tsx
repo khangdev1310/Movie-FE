@@ -1,17 +1,17 @@
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import { loginEndpoint } from "../ultils/spotify";
-import Typewriter from "typewriter-effect";
-import { Container } from "tsparticles-engine";
-import "./Login.scss";
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
+import { loginEndpoint } from '../ultils/spotify';
+import Typewriter from 'typewriter-effect';
+import { Container } from 'tsparticles-engine';
+import './Login.scss';
 
 function Login() {
   const particlesInit = async (main: any) => {
-    console.log(main);
     await loadFull(main);
   };
 
   const particlesLoaded = async (container: Container | undefined) => {
+    // eslint-disable-next-line no-console
     console.log(container);
   };
   return (
@@ -23,7 +23,7 @@ function Login() {
         options={{
           background: {
             color: {
-              value: "#000",
+              value: '#000',
             },
           },
           fpsLimit: 120,
@@ -31,11 +31,11 @@ function Login() {
             events: {
               onClick: {
                 enable: true,
-                mode: "push",
+                mode: 'push',
               },
               onHover: {
                 enable: true,
-                mode: "repulse",
+                mode: 'repulse',
               },
               resize: true,
             },
@@ -51,10 +51,10 @@ function Login() {
           },
           particles: {
             color: {
-              value: "#ffffff",
+              value: '#ffffff',
             },
             links: {
-              color: "#ffffff",
+              color: '#ffffff',
               distance: 150,
               enable: true,
               opacity: 0.5,
@@ -64,10 +64,10 @@ function Login() {
               enable: true,
             },
             move: {
-              direction: "none",
+              direction: 'none',
               enable: true,
               outModes: {
-                default: "bounce",
+                default: 'bounce',
               },
               random: false,
               speed: 6,
@@ -84,7 +84,7 @@ function Login() {
               value: 0.5,
             },
             shape: {
-              type: "circle",
+              type: 'circle',
             },
             size: {
               value: { min: 1, max: 5 },
@@ -101,10 +101,10 @@ function Login() {
       <Typewriter
         onInit={(typewriter) => {
           typewriter
-            .typeString("Welcome to <strong>MiniMusic</strong>")
+            .typeString('Welcome to <strong>MiniMusic</strong>')
             .pauseFor(1000)
             .deleteAll()
-            .typeString("Please login to continue to the next page.")
+            .typeString('Please login to continue to the next page.')
             .start();
         }}
       />
