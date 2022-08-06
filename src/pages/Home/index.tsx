@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import DataGrid from '../../components/DataGrid';
 import { fetchAlbumRequest } from '../../redux/actions/albumAction';
 import { fetchCategoryRequest } from '../../redux/actions/categoryAction';
+import { fetchRecommendRequest } from '../../redux/actions/recommendActions';
 import { AppState, useAppSelector } from '../../redux/rootReducer';
-import DataTest from '../../ultils/index';
 
 type HomeProps = {
   setPlayerId: Function;
@@ -15,12 +15,14 @@ const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
   const { data } = useAppSelector((state: AppState) => state.albums);
 
   const { dataCategory } = useAppSelector((state: AppState) => state.category);
+  const { recommends } = useAppSelector((state: AppState) => state.recommend);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchAlbumRequest());
     dispatch(fetchCategoryRequest());
+    dispatch(fetchRecommendRequest());
   }, []);
 
   // if (!albums) return <Loader />;
@@ -29,7 +31,14 @@ const Home: FC<HomeProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
     <div className="mx-[5vw] pb-6">
       <h1 className="mt-4 mb-3 text-2xl">Recommended</h1>
       <DataGrid
-        data={DataTest.getReleases()}
+        data={recommends.tracks
+          .filter((track) => track.name)
+          .map((track) => ({
+            id: track.id,
+            image: (track as any)?.album?.images?.[0]?.url,
+            title: track.name,
+            description: track?.artists.map((artist) => artist.name).join(', '),
+          }))}
         type="button"
         handler={(id: string) => {
           setPlayerId(id);
