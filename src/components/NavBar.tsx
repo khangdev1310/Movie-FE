@@ -2,10 +2,13 @@ import { FC, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdCancel } from 'react-icons/md';
+import useDarkMode from './DarkMode';
+import { BsSunFill, BsFillMoonFill } from 'react-icons/bs';
 
 const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [theme, toggleDarkMode] = useDarkMode();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,7 +32,7 @@ const NavBar: FC = () => {
     <div
       className={`${
         isOpen ? 'h-[122px]' : 'h-16'
-      } md:!h-16 border-b border-gray-800 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-stretch md:items-center px-[5vw] `}
+      } md:!h-16 dark:border-b-gray-800 border-gray-800 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-stretch md:items-center px-[5vw] `}
     >
       <div className="flex items-center justify-between">
         <div
@@ -43,7 +46,21 @@ const NavBar: FC = () => {
             src="/music1.png"
             alt="music"
           />
+
           <h1 className="text-xl">Music</h1>
+          {theme ? (
+            <BsSunFill
+              color="yellow"
+              className="pl-1 w-8 h-8 cursor-pointer"
+              onClick={() => toggleDarkMode(!theme)}
+            />
+          ) : (
+            <BsFillMoonFill
+              color="yellow"
+              className="pl-1 w-8 h-8 cursor-pointer"
+              onClick={() => toggleDarkMode(!theme)}
+            />
+          )}
         </div>
         <button className="md:hidden" onClick={handleOpen}>
           {isOpen ? (
@@ -64,11 +81,13 @@ const NavBar: FC = () => {
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => e.stopPropagation()}
           onKeyUp={(e) => e.stopPropagation()}
-          className="bg-dark border border-gray-600 rounded-full w-full px-3 py-2 outline-none md:w-60 duration-300 hover:border-purple-hover pr-[40px]
+          className="bg-dark border border-gray-600 rounded-full 
+          w-full px-3 py-2 outline-none md:w-60 duration-300 dark:hover:border-purple-hover pr-[40px]
+          text-white
 		  "
         />
-        <button className="absolute -translate-y-1/2 right-2 top-1/2">
-          <AiOutlineSearch className="w-6 h-6" />
+        <button className="absolute right-2 top-1/2 -translate-y-1/2">
+          <AiOutlineSearch className="w-6 h-6 fill-white" />
         </button>
       </form>
     </div>
