@@ -46,7 +46,7 @@ export interface IAlbum {
 }
 
 export interface AlbumState {
-  albums: IAlbum;
+  data: IAlbum;
   loading: boolean;
   error: string | null;
 }
