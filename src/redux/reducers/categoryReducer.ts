@@ -6,7 +6,7 @@ import {
 } from "../types/categoryType";
 
 const initialState: CategoryState = {
-  data: {
+  dataCategory: {
     categories: {
       href: "",
       items: [],
@@ -35,7 +35,7 @@ export const categoryReducer = (
     case FETCH_CATEGORY_SUCCESS:
       return {
         ...state,
-        data: action.payload.data,
+        dataCategory: action.payload.data,
         loading: false,
         error: null,
       };

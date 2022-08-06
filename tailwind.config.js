@@ -14,10 +14,10 @@ module.exports = {
         "pink-500": "#AD26FF",
       },
       gridTemplateColumns: {
-        "fill-small": "repeat(auto-fill, minmax(150px, 1fr))",
-        "fill-medium": "repeat(auto-fill, minmax(180px, 1fr))",
+        'fill-small': 'repeat(auto-fill, minmax(150px, 1fr))',
+        'fill-medium': 'repeat(auto-fill, minmax(180px, 1fr))',
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [require('@tailwindcss/line-clamp')],
 };
