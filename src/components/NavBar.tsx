@@ -1,13 +1,14 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdCancel } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
 
 const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -16,9 +17,13 @@ const NavBar: FC = () => {
   const handleSubmitForm = (e: FormEvent) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      // navigate(`/search?x=${encodeURIComponent(inputValue.trim())}`);
+      navigate(`/search?q=${encodeURIComponent(inputValue.trim())}`);
     }
   };
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname, location.search]);
 
   return (
     <div

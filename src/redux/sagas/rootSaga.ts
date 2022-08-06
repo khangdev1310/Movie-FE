@@ -3,6 +3,7 @@ import albumSaga from "./albumSaga";
 import audioSaga from "./audioSaga";
 import categorySaga, { categoryPlaylistsSaga } from "./categorySaga";
 import detailedAlbumSaga from "./detailedAlbumSaga";
+import searchSaga from "./searchSaga";
 
 export function* rootSaga() {
   yield all([
@@ -11,5 +12,6 @@ export function* rootSaga() {
     fork(audioSaga),
     fork(categorySaga),
     fork(categoryPlaylistsSaga),
+    fork(searchSaga),
   ]);
 }

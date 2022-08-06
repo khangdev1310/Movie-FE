@@ -8,6 +8,7 @@ import useAudio from './components/useAudio';
 import Album from './pages/Album';
 import Category from './pages/Category';
 import Home from './pages/Home';
+import Search from './pages/Search';
 
 const App: FC = () => {
   const [token, setToken] = useState<string | null>('');
@@ -62,6 +63,15 @@ const App: FC = () => {
             }
           />
           <Route path="category/:id" element={<Category />} />
+          <Route
+            path="search"
+            element={
+              <Search
+                setPlayerId={setPlayerId}
+                setIsPlayerIdChanged={setIsPlayerIdChanged}
+              />
+            }
+          />
         </Routes>
       </div>
       {playerId && <Audio playerId={playerId} />}
