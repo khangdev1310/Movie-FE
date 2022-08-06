@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react";
-import { withErrorBoundary } from "react-error-boundary";
-import { Route, Routes, useLocation } from "react-router-dom";
-import Login from "./auth";
-import Audio from "./components/Audio";
-import ErrorBoundaryFallback from "./components/ErrorBoundaryFallback";
+import { useEffect, useState } from 'react';
+import { withErrorBoundary } from 'react-error-boundary';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import Login from './auth';
+import Audio from './components/Audio';
+import ErrorBoundaryFallback from './components/ErrorBoundaryFallback';
 
-import NavBar from "./components/NavBar";
-import useAudio from "./components/useAudio";
-import Album from "./pages/Album";
-import Artist from "./pages/Artist";
-import Category from "./pages/Category";
-import Home from "./pages/Home";
-import Playlist from "./pages/Playlist";
-import Search from "./pages/Search";
-import { ToastContainer } from "react-toastify";
+import NavBar from './components/NavBar';
+import useAudio from './components/useAudio';
+import Album from './pages/Album';
+import Artist from './pages/Artist';
+import Category from './pages/Category';
+import Home from './pages/Home';
+import Playlist from './pages/Playlist';
+import Search from './pages/Search';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
-  const [token, setToken] = useState<string | null>("");
+  const [token, setToken] = useState<string | null>('');
   const { playerId, setPlayerId, setIsPlayerIdChanged } = useAudio();
 
   useEffect(() => {
-    const hash: string = window.location.hash;
-    const accessToken: string | null = localStorage.getItem("token");
+    const hash = window.location.hash;
+    const accessToken = localStorage.getItem('token');
     if (!accessToken && hash) {
-      let _token: string = hash.split("&")[0].split("=")[1];
-      window.location.hash = "";
-      window.localStorage.setItem("token", _token);
+      let _token = hash.split('&')[0].split('=')[1];
+      window.location.hash = '';
+      window.localStorage.setItem('token', _token);
       setToken(_token);
     } else {
       setToken(accessToken);
@@ -33,7 +33,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("minizing-playing", playerId);
+    localStorage.setItem('minizing-playing', playerId);
   }, [playerId]);
 
   // Scroll to Top

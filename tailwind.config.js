@@ -15,13 +15,13 @@ module.exports = {
         "yellow-500": "#e2d51a",
       },
       gridTemplateColumns: {
-        "fill-small": "repeat(auto-fill, minmax(150px, 1fr))",
-        "fill-medium": "repeat(auto-fill, minmax(180px, 1fr))",
+        'fill-small': 'repeat(auto-fill, minmax(150px, 1fr))',
+        'fill-medium': 'repeat(auto-fill, minmax(180px, 1fr))',
       },
       boxShadow: {
         md: "6px 6px 16px 0 rgba(0, 0, 0, 0.25),-4px -4px 12px 0 rgba(255, 255, 255, 0.3)",
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

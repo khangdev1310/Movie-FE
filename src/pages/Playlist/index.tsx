@@ -1,28 +1,24 @@
-import React, { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchPlaylistRequest } from "../../redux/actions/playlistAction";
-import { AppState, useAppSelector } from "../../redux/rootReducer";
-import { formatDuration } from "../../ultils";
+import React, { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchPlaylistRequest } from '../../redux/actions/playlistAction';
+import { AppState, useAppSelector } from '../../redux/rootReducer';
+import { formatDuration } from '../../ultils';
 
 type PlaylistProps = {
   setPlayerId: Function;
-}
+};
 
-const Playlist: FC<PlaylistProps> = ({setPlayerId}) => {
+const Playlist: FC<PlaylistProps> = ({ setPlayerId }) => {
   const { id } = useParams();
 
-  const { data, loading, error } = useAppSelector(
-    (state: AppState) => state.playlist
-  );
+  const { data } = useAppSelector((state: AppState) => state.playlist);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     id && dispatch(fetchPlaylistRequest(id));
   }, []);
-
-  
 
   return (
     <div className="mx-[5vw] my-10 flex flex-col md:flex-row items-start gap-10">
@@ -32,7 +28,9 @@ const Playlist: FC<PlaylistProps> = ({setPlayerId}) => {
           src={data.images?.[0]?.url}
           alt=""
         />
-        <h1 className="text-center text-2xl font-semibold my-3 ">{data.name}</h1>
+        <h1 className="text-center text-2xl font-semibold my-3 ">
+          {data.name}
+        </h1>
         <div className="flex flex-wrap justify-center text-indigo-600  dark:text-gray-400 ">
           {data.owner.display_name}
         </div>
@@ -46,7 +44,6 @@ const Playlist: FC<PlaylistProps> = ({setPlayerId}) => {
               key={track.id}
               onClick={() => {
                 setPlayerId(track.id);
-                
               }}
               className="w-full flex justify-between items-center p-2 text-left bg-dark hover:bg-dark-hovered transition duration-300"
             >
@@ -59,7 +56,7 @@ const Playlist: FC<PlaylistProps> = ({setPlayerId}) => {
                   <p className="text-slate-400">
                     {(track as any).artists
                       .map((artist: any) => artist.name)
-                      .join(", ")}
+                      .join(', ')}
                   </p>
                 </div>
               </div>

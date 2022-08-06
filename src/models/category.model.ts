@@ -32,7 +32,7 @@ export interface Icon {
 }
 
 export interface CategoryState {
-  data: Root;
+  dataCategory: Root;
   loading: boolean;
   error: string | null;
 }

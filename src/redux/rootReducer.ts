@@ -1,3 +1,5 @@
+import { AppDispatch, RootState } from "./store";
+
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { combineReducers } from "redux";
 import { albumReducer } from "./reducers/albumReducer";
@@ -9,10 +11,10 @@ import { detailedAlbumReducer } from "./reducers/detailedAlbumReducer";
 import { playlistReducer } from "./reducers/playlistReducer";
 import { recommendReducer } from "./reducers/recommendReducer";
 import { searchReducer } from "./reducers/searchReducer";
-import { AppDispatch, RootState } from "./store";
+
 
 const rootReducer = combineReducers({
-  album: albumReducer,
+  albums: albumReducer,
   detailedAlbum: detailedAlbumReducer,
   audio: audioReducer,
   category: categoryReducer,

@@ -1,15 +1,15 @@
-import React, { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import DataGrid from "../../components/DataGrid";
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import DataGrid from '../../components/DataGrid';
 import {
   fetchArtistAlbumsRequest,
   fetchArtistRelatedRequest,
   fetchArtistRequest,
   fetchArtistToptracksRequest,
-} from "../../redux/actions/artistActions";
-import { AppState } from "../../redux/rootReducer";
-import { formatNumber } from "../../ultils";
+} from '../../redux/actions/artistActions';
+import { AppState } from '../../redux/rootReducer';
+import { formatNumber } from '../../ultils';
 
 type ArtistProps = {
   // setPlayerId: (id: string) => void;
@@ -19,14 +19,9 @@ type ArtistProps = {
 const Artist: FC<ArtistProps> = ({ setPlayerId }) => {
   const { id } = useParams();
 
-  const {
-    artist,
-    artistAlbums,
-    artistRelated,
-    artistToptracks,
-    loading,
-    error,
-  } = useSelector((state: AppState) => state.artist);
+  const { artist, artistAlbums, artistRelated, artistToptracks } = useSelector(
+    (state: AppState) => state.artist
+  );
 
   const dispatch = useDispatch();
 
@@ -73,7 +68,7 @@ const Artist: FC<ArtistProps> = ({ setPlayerId }) => {
             id: track.id,
             image: (track as any)?.album?.images?.[0]?.url,
             title: track.name,
-            description: track?.artists.map((artist) => artist.name).join(", "),
+            description: track?.artists.map((artist) => artist.name).join(', '),
           }))}
       />
 
@@ -90,7 +85,7 @@ const Artist: FC<ArtistProps> = ({ setPlayerId }) => {
             title: album.name,
             description: (album as any)?.artists
               ?.map((artist: any) => artist?.name)
-              ?.join(", "),
+              ?.join(', '),
           }))}
       />
 

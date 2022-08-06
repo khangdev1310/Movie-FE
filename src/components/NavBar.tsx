@@ -1,10 +1,10 @@
-import { FC, FormEvent, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
-import { MdCancel } from "react-icons/md";
-import useDarkMode from "./DarkMode";
-import { BsSunFill, BsFillMoonFill } from "react-icons/bs";
-import styled from "styled-components";
+import { FC, FormEvent, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { MdCancel } from 'react-icons/md';
+import useDarkMode from './DarkMode';
+import { BsSunFill, BsFillMoonFill } from 'react-icons/bs';
+import styled from 'styled-components';
 
 const StyledImg = styled.img`
   width: 48px;
@@ -29,7 +29,7 @@ const StyleInput = styled.input`
 
 const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const [theme, toggleDarkMode] = useDarkMode();
 
   const navigate = useNavigate();
@@ -53,14 +53,14 @@ const NavBar: FC = () => {
   return (
     <div
       className={`${
-        isOpen ? "h-[122px]" : "h-16"
+        isOpen ? 'h-[122px]' : 'h-16'
       } md:!h-16 dark:border-b-gray-800 border-gray-800 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-stretch md:items-center px-[5vw] `}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div
           className="flex items-center cursor-pointer"
           onClick={() => {
-            navigate("/");
+            navigate('/');
           }}
         >
           <StyledImg src="/music1.png" alt="music" />
@@ -80,7 +80,7 @@ const NavBar: FC = () => {
             />
           )}
         </div>
-        <button className="sm:hidden" onClick={handleOpen}>
+        <button className="md:hidden" onClick={handleOpen}>
           {isOpen ? (
             <MdCancel className="w-6 h-6 font-extrabold" />
           ) : (
@@ -90,7 +90,7 @@ const NavBar: FC = () => {
       </div>
 
       <form
-        className={`relative ${isOpen ? "flex" : "hidden"} sm:!flex `}
+        className={`relative ${isOpen ? 'flex' : 'hidden'} sm:!flex `}
         onSubmit={handleSubmitForm}
       >
         <StyleInput
