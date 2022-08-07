@@ -1,1 +1,4 @@
 **/*.test.tsx
+**/*.css
+**/*.scss
+**/*.svg
