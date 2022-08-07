@@ -13,6 +13,7 @@ axiosClient.interceptors.request.use(
         config.headers = {};
       }
       config.headers.Authorization = `Bearer ${userInfo}`;
+      console.log('aaa');
     }
     return config;
   },
