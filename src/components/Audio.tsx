@@ -76,7 +76,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
   useEffect(() => {
     dispatch(fetchAudioRequest(playerId));
-    setIsPaused(true);
+    setIsPaused(false);
   }, [playerId]);
 
   return (
@@ -84,10 +84,11 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
       <audio
         controls
         ref={audioRef}
+        key={audio.tracks[0]?.id}
         src={audio.tracks[0]?.preview_url}
         className="hidden"
         hidden
-        autoPlay={false}
+        autoPlay={true}
         loop={isLoop}
         onTimeUpdateCapture={() => {
           if (audioRef.current) {
@@ -145,13 +146,16 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
             <button
               title={isError ? 'Error' : isPaused ? 'Play' : 'Pause'}
-              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200 ${
-                isError ? 'border-red-500' : ''
-              } ${isPaused ? '' : 'border-purple-hover'}`}
+              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200
+              ${isPaused ? '' : 'border-purple-hover'} ${
+                isError || audio.tracks[0].preview_url === null
+                  ? 'border-red-500 !important'
+                  : ''
+              }  `}
               onClick={() => setIsPaused((prev) => !prev)}
               disabled={!!error || loading}
             >
-              {isError ? (
+              {isError || audio.tracks[0].preview_url === null ? (
                 <span className="text-red-500">{`!`}</span>
               ) : loading ? (
                 <Spinner />

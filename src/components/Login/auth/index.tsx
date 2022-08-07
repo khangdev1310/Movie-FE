@@ -1,8 +1,8 @@
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
-import { loginEndpoint } from '../ultils/spotify';
-import Typewriter from 'typewriter-effect';
 import { Container } from 'tsparticles-engine';
+import Typewriter from 'typewriter-effect';
+import { loginEndpoint } from '../../../ultils/spotify';
 import './Login.scss';
 
 function Login() {
