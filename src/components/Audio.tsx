@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { fetchAudioRequest } from '../redux/actions/audioAction';
 import { AppState, useAppDispatch, useAppSelector } from '../redux/rootReducer';
 import { formatDuration } from '../ultils';
+import Spinner from './Spinner';
 import Volume from './Volume';
 
 type AudioProps = {
@@ -15,7 +16,9 @@ type AudioProps = {
 
 const Audio: FC<AudioProps> = ({ playerId }) => {
   // get audio from store
-  const { audio } = useAppSelector((state: AppState) => state.audio);
+  const { audio, loading, error } = useAppSelector(
+    (state: AppState) => state.audio
+  );
 
   //Get id when change tracks
 
@@ -34,7 +37,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
   const [isPaused, setIsPaused] = useState(false);
 
-  const isError = false;
+  const isError = error;
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Effect
@@ -129,6 +132,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
             <button
               title={isLoop ? 'Disable repeat' : 'Enable repeat'}
               onClick={() => setIsLoop(!isLoop)}
+              disabled={!!isError || loading}
             >
               <MdRepeat
                 className={`${
@@ -141,13 +145,16 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
             <button
               title={isError ? 'Error' : isPaused ? 'Play' : 'Pause'}
-              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200${
+              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200 ${
                 isError ? 'border-red-500' : ''
               } ${isPaused ? '' : 'border-purple-hover'}`}
               onClick={() => setIsPaused((prev) => !prev)}
+              disabled={!!error || loading}
             >
               {isError ? (
                 <span className="text-red-500">{`!`}</span>
+              ) : loading ? (
+                <Spinner />
               ) : isPaused ? (
                 <FaPlay className="w-3 h-3 fill-white group-hover:fill-purple-hover" />
               ) : (
@@ -160,6 +167,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
               href="https://open.spotify.com/track/02Vb9vfZUmqAKNhQwFjPSZ"
               target="_blank"
               rel="noopener noreferrer"
+              className={loading || isError ? 'pointer-events-none' : ''}
             >
               <RiExternalLinkLine className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
             </a>

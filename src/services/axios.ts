@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 const axiosClient = axios.create({
   baseURL: "https://api.spotify.com/v1/",
@@ -32,9 +33,29 @@ axiosClient.interceptors.response.use(
       switch (err.response.status) {
         case 401:
           localStorage.removeItem("token");
+          toast.error("Access is denied. Please login again", {
+            position: "bottom-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+          });
+          toast.clearWaitingQueue({ containerId: "toast-container" });
+
           break;
         case 403:
-          alert("Forbidden");
+          toast.error("Forbidden", {
+            position: "bottom-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+          });
+          toast.clearWaitingQueue({ containerId: "toast-container" });
           break;
         default:
           return Promise.reject(err);

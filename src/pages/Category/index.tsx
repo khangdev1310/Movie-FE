@@ -18,7 +18,7 @@ const Category: any = () => {
   }, []);
 
   return (
-    <div className="mx-[5vw] mb-5">
+    <div className="mx-[5vw] mb-5 h-[100%]">
       <h1 className="mt-5 mb-3 text-2xl">
         Category:{' '}
         {value.data?.categories.items.find((item: any) => item.id === id)?.name}{' '}

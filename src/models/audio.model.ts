@@ -62,7 +62,7 @@ export interface FetchAudioSuccessPayload {
 }
 
 export interface FetchAudioFailurePayload {
-  error: string;
+  message: string;
 }
 
 export interface FetchAudioRequest {

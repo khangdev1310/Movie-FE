@@ -4,6 +4,7 @@ import watchAll from "./artistSaga";
 import audioSaga from "./audioSaga";
 import categorySaga, { categoryPlaylistsSaga } from "./categorySaga";
 import detailedAlbumSaga from "./detailedAlbumSaga";
+import playlistSaga from "./playlistSaga";
 import recommendSaga from "./recommendSaga";
 import searchSaga from "./searchSaga";
 
@@ -16,6 +17,7 @@ export function* rootSaga() {
     fork(categoryPlaylistsSaga),
     fork(searchSaga),
     fork(watchAll),
-    fork(recommendSaga)
+    fork(recommendSaga),
+    fork(playlistSaga),
   ]);
 }

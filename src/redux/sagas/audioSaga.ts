@@ -23,7 +23,9 @@ function* fetchAudioSaga(id: FetchAudioRequest) {
       })
     );
   } catch (error: any) {
-    yield put(fetchAudioFailure(error.message));
+    
+
+    yield put(fetchAudioFailure(error));
   }
 }
 

@@ -48,10 +48,10 @@ export const audioReducer = (
         loading: false,
         error: null,
       };
-    case FETCH_AUDIO_FAILURE:
+    case FETCH_AUDIO_FAILURE:      
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload.message,
         loading: false,
       };
     default:

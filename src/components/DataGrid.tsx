@@ -13,11 +13,13 @@ interface DataGridProps {
   data: DataType[];
   type: 'link' | 'button';
   handler: Function;
+  classType?: string;
 }
 
-const GridItem: FC<DataType> = (item, handler) => (
+const GridItem: any = (item, handler, classType) => (
   <div
-    className="relative w-full p-2 transition duration-300 rounded-md cursor-pointer bg-dark hover:bg-dark-hovered group"
+    className="w-full transition duration-300  p-2 rounded-md relative group cursor-pointer shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-700
+    dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[100%]"
     onClick={() => handler(item.id)}
     key={item.id}
   >
@@ -25,40 +27,46 @@ const GridItem: FC<DataType> = (item, handler) => (
       <img
         src={item.image}
         alt="test"
-        className="absolute h-full w-full object-cover rounded-md group-hover:brightness-[80%] transition duration-300"
+        className="absolute h-full w-full object-cover dark:rounded-md group-hover:brightness-[80%] transition duration-300"
       />
-      <div className="absolute flex items-center justify-center w-10 h-10 transition duration-300 -translate-x-1/2 -translate-y-1/2 border rounded-full opacity-0 top-1/2 left-1/2 group-hover:opacity-100 ">
+      <div
+        className="absolute h-10 w-10 rounded-full border top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center
+        opacity-0 group-hover:opacity-100 transition duration-300"
+      >
         <FaPlay className="w-5 h-5 fill-white" />
       </div>
     </div>
 
-    <p className="mt-2 font-medium transition duration-300 line-clamp-3 group-hover:text-purple-hover">
+    <p
+      className={
+        `mt-2 font-medium   dark:group-hover:text-purple-hover transition duration-300  dark:text-white
+              truncate 
+            ` + (classType ? classType : 'text-indigo-600')
+      }
+    >
       {item.title}
     </p>
     {item.description && (
-      <p className="text-gray-400 line-clamp-2">{item.description} </p>
+      <p className="text-dark dark:text-gray-400 line-clamp-2">
+        {item.description}{' '}
+      </p>
     )}
   </div>
 );
 
 const GridItemLink: FC<DataType> = (item, handler) => (
   <div key={item.id}>
-    <Link
-      className="relative block w-full p-2 transition duration-300 rounded-md bg-dark hover:bg-dark-hovered group"
-      to={handler(item.id)}
-    >
-      {GridItem(item, handler)}
-    </Link>
+    <Link to={handler(item.id)}>{GridItem(item, handler)}</Link>
   </div>
 );
 
-const DataGrid: FC<DataGridProps> = ({ data, type, handler }) => {
+const DataGrid: FC<DataGridProps> = ({ data, type, handler, classType }) => {
   return (
-    <div className="grid gap-3 grid-cols-fill-small md:grid-cols-fill-medium">
+    <div className="grid grid-cols-fill-small md:grid-cols-fill-medium gap-3 text-white font-bold">
       {data.map((item) => {
         return type === 'link'
           ? GridItemLink(item, handler)
-          : GridItem(item, handler);
+          : GridItem(item, handler, classType);
       })}
     </div>
   );

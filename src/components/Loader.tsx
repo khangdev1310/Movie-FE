@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { SpinStretch } from "react-cssfx-loading";
+import { FC } from 'react';
+import { SpinStretch } from 'react-cssfx-loading';
 
 const Loader: FC = () => {
   return (

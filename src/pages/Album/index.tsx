@@ -21,7 +21,7 @@ const Album: FC<AlbumProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
   }, []);
 
   return (
-    <div className="mx-[5vw] my-10 flex flex-col md:flex-row items-start gap-10">
+    <div className="mx-[5vw] my-10 flex flex-col md:flex-row items-start gap-10 h-[100%]">
       <div className="flex-shrink-0 md:sticky top-10 flex flex-col items-center w-full md:w-auto">
         <img
           className="w-[350px] h-[350px] object-cover"
@@ -32,11 +32,11 @@ const Album: FC<AlbumProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
           {details.name}
         </h1>
 
-        <div className="flex flex-wrap justify-center text-gray-400">
+        <div className="flex flex-wrap justify-center dark:text-gray-400 text-indigo-600">
           {details.artists.map((artist, index) => (
             <Fragment key={artist.id}>
               {index !== 0 && <span>, </span>}
-              <Link to="">{artist.name}</Link>
+              <Link to={`/artist/${artist?.id}`}>{artist.name}</Link>
             </Fragment>
           ))}
         </div>
@@ -58,15 +58,17 @@ const Album: FC<AlbumProps> = ({ setPlayerId, setIsPlayerIdChanged }) => {
                   {index + 1}
                 </div>
                 <div className="transition duration-300">
-                  <h1 className="font-medium group-hover:text-purple-hover">
+                  <h1 className="font-medium group-hover:text-purple-hover text-white">
                     {item.name}
                   </h1>
-                  <p className="text-slate-400 ">
+                  <p className="text-slate-400">
                     {item.artists.map((item: any) => item.name).join(', ')}
                   </p>
                 </div>
               </div>
-              <div>{formatDuration(item.duration_ms)}</div>
+              <div className="text-white">
+                {formatDuration(item.duration_ms)}
+              </div>
             </button>
           );
         })}
