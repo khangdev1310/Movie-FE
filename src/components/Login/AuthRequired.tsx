@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Login from './auth';
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 
 const AuthRequired: FC<Props> = ({ children }) => {
   const [token, setToken] = useState<string | null>('');
+  const navigate = useNavigate();
   useEffect(() => {
     const hash = window.location.hash;
     const accessToken = localStorage.getItem('token');
@@ -18,9 +20,13 @@ const AuthRequired: FC<Props> = ({ children }) => {
     } else {
       setToken(accessToken);
     }
+    if (token === null || token === '') {
+      // return <Navigate to="/login" replace />;
+      navigate('/login', { replace: true });
+    }
   }, []);
 
-  return token === null ? <Login /> : <>{children}</>;
+  return <>{children}</>;
 };
 
 export default AuthRequired;

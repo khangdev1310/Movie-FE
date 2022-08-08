@@ -14,13 +14,14 @@ import Category from './pages/Category';
 import Home from './pages/Home';
 import Playlist from './pages/Playlist';
 import Search from './pages/Search';
+import Login from './components/Login/auth';
 
 const App = () => {
   const { playerId, setPlayerId, setIsPlayerIdChanged } = useAudio();
 
-  useEffect(() => {
-    localStorage.setItem('minizing-playing', playerId);
-  }, [playerId]);
+  // useEffect(() => {
+  //   localStorage.setItem('minizing-playing', playerId);
+  // }, [playerId]);
 
   // Scroll to Top
   const location = useLocation();
@@ -32,7 +33,8 @@ const App = () => {
     <AuthRequired>
       <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">
         <div className="min-h-[100vh] text-black font-bold dark:text-white ">
-          <NavBar />
+          {location.pathname === '/login' ? null : <NavBar />}
+
           <Routes>
             <Route
               index
@@ -43,6 +45,8 @@ const App = () => {
                 />
               }
             />
+            <Route path="login" element={<Login />} />
+
             <Route
               path="album/:id"
               element={
@@ -73,9 +77,13 @@ const App = () => {
             />
           </Routes>
         </div>
-        {!!playerId && <Audio playerId={playerId} />}
+        {location.pathname != '/login' && !!playerId && (
+          <Audio playerId={playerId} />
+        )}
       </div>
-      <ToastContainer limit={1} containerId="toast-container" />
+      {location.pathname != '/login' && (
+        <ToastContainer limit={1} containerId="toast-container" />
+      )}
     </AuthRequired>
   );
 };

@@ -3,7 +3,7 @@ import { FaPlay } from 'react-icons/fa';
 import { IoMdPause } from 'react-icons/io';
 import { MdRepeat, MdVolumeOff, MdVolumeUp } from 'react-icons/md';
 import { RiExternalLinkLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchAudioRequest } from '../redux/actions/audioAction';
 import { AppState, useAppDispatch, useAppSelector } from '../redux/rootReducer';
 import { formatDuration } from '../ultils';
@@ -37,6 +37,8 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
   const isError = error;
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const navigate = useNavigate();
 
   // Effect
   useEffect(() => {
@@ -74,6 +76,10 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
   useEffect(() => {
     dispatch(fetchAudioRequest(playerId));
   }, [playerId]);
+
+  // if (error) {
+  //   throw new Error(error);
+  // }
 
   return (
     <>

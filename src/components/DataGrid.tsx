@@ -18,7 +18,7 @@ interface DataGridProps {
 
 const GridItem: any = (item, handler, classType) => (
   <div
-    className="w-full transition duration-300  p-2 rounded-md relative group cursor-pointer shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-700
+    className="w-full transition duration-300  p-2 rounded-md relative group cursor-pointer md:shadow-md bg-gradient-to-b from-white/40 to-transparent hover:bg-gray-700
     dark:from-dark dark:to-dark dark:hover:bg-dark-hovered h-[100%]"
     onClick={() => handler(item.id)}
     key={item.id}

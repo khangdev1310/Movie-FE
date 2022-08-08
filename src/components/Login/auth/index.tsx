@@ -1,3 +1,5 @@
+import { memo } from 'react';
+import { Navigate } from 'react-router-dom';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import { Container } from 'tsparticles-engine';
@@ -6,6 +8,10 @@ import { loginEndpoint } from '../../../ultils/spotify';
 import './Login.scss';
 
 function Login() {
+  if (localStorage.getItem('token')) {
+    return <Navigate to="/" />;
+  }
+
   const particlesInit = async (main: any) => {
     await loadFull(main);
   };
@@ -116,4 +122,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default memo(Login);

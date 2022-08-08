@@ -1,13 +1,13 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { toast } from "react-toastify";
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { toast } from 'react-toastify';
 
 const axiosClient = axios.create({
-  baseURL: "https://api.spotify.com/v1/",
+  baseURL: 'https://api.spotify.com/v1/',
 });
 
 axiosClient.interceptors.request.use(
   async (config: AxiosRequestConfig) => {
-    const userInfo = localStorage.getItem("token");
+    const userInfo = localStorage.getItem('token');
     if (userInfo) {
       if (config.headers === undefined) {
         config.headers = {};
@@ -32,22 +32,26 @@ axiosClient.interceptors.response.use(
     if (err.response) {
       switch (err.response.status) {
         case 401:
-          localStorage.removeItem("token");
-          toast.error("Access is denied. Please login again", {
-            position: "bottom-center",
+          localStorage.removeItem('token');
+          toast('Access is denied. Please login again', {
+            position: 'bottom-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: false,
             draggable: false,
             progress: undefined,
+            onClose: () => {
+              window.location.href = '/';
+            },
           });
-          toast.clearWaitingQueue({ containerId: "toast-container" });
 
+          toast.clearWaitingQueue({ containerId: 'toast-container' });
           break;
+
         case 403:
-          toast.error("Forbidden", {
-            position: "bottom-center",
+          toast.error('Forbidden', {
+            position: 'bottom-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: false,
@@ -55,7 +59,7 @@ axiosClient.interceptors.response.use(
             draggable: false,
             progress: undefined,
           });
-          toast.clearWaitingQueue({ containerId: "toast-container" });
+          toast.clearWaitingQueue({ containerId: 'toast-container' });
           break;
         default:
           return Promise.reject(err);
