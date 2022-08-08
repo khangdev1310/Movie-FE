@@ -75,6 +75,8 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
     dispatch(fetchAudioRequest(playerId));
   }, [playerId]);
 
+  console.log(audio.tracks[0].preview_url);
+
   return (
     <>
       <audio
@@ -177,14 +179,21 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
           <div className="items-center justify-center hidden w-full gap-4 text-sm md:flex">
             <span className="flex-shrink-0">
-              {formatDuration(currentTime * 1000)}
+              {audio.tracks[0].preview_url === null
+                ? formatDuration(0 * 1000)
+                : formatDuration(currentTime * 1000)}
             </span>
 
             <Volume
               className="flex-grow max-w-[400px]"
-              width={duration !== 0 ? (currentTime / duration) * 100 : 0}
+              width={
+                audio.tracks[0].preview_url === null
+                  ? 0
+                  : duration !== 0
+                  ? (currentTime / duration) * 100
+                  : 0
+              }
               setWidth={(val: number) => {
-                setCurrentTime((val / 100) * duration);
                 if (audioRef.current) {
                   audioRef.current.currentTime = (val / 100) * duration;
                 }
