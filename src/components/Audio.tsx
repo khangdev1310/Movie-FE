@@ -75,8 +75,6 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
     dispatch(fetchAudioRequest(playerId));
   }, [playerId]);
 
-  console.log(audio.tracks[0].preview_url);
-
   return (
     <>
       <audio
