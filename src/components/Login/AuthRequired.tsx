@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import Login from './auth';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   children: React.ReactNode;
