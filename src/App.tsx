@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { withErrorBoundary } from 'react-error-boundary';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Audio from './components/Audio';
-import ErrorBoundaryFallback from './components/ErrorBoundaryFallback';
+import ErrorBoundaryFallback from './components/ErrorBoundary/ErrorBoundaryFallback';
 
 import { ToastContainer } from 'react-toastify';
 import AuthRequired from './components/Login/AuthRequired';
@@ -15,6 +15,7 @@ import Home from './pages/Home';
 import Playlist from './pages/Playlist';
 import Search from './pages/Search';
 import Login from './components/Login/auth';
+import ErrorBoundaryTest from './components/ErrorBoundaryTest';
 
 const App = () => {
   const { playerId, setPlayerId, setIsPlayerIdChanged } = useAudio();
@@ -30,61 +31,65 @@ const App = () => {
   }, [location]);
 
   return (
-    <AuthRequired>
-      <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">
-        <div className="min-h-[100vh] text-black font-bold dark:text-white ">
-          {location.pathname === '/login' ? null : <NavBar />}
+    // <AuthRequired>
+    //   <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">
+    //     <div className="min-h-[100vh] text-black font-bold dark:text-white ">
+    //       {location.pathname === '/login' ? null : <NavBar />}
 
-          <Routes>
-            <Route
-              index
-              element={
-                <Home
-                  setPlayerId={setPlayerId}
-                  setIsPlayerIdChanged={setIsPlayerIdChanged}
-                />
-              }
-            />
-            <Route path="login" element={<Login />} />
+    //       <Routes>
+    //         <Route
+    //           index
+    //           element={
+    //             <Home
+    //               setPlayerId={setPlayerId}
+    //               setIsPlayerIdChanged={setIsPlayerIdChanged}
+    //             />
+    //           }
+    //         />
+    //         <Route path="login" element={<Login />} />
 
-            <Route
-              path="album/:id"
-              element={
-                <Album
-                  setPlayerId={setPlayerId}
-                  setIsPlayerIdChanged={setIsPlayerIdChanged}
-                />
-              }
-            />
-            <Route path="category/:id" element={<Category />} />
-            <Route
-              path="search"
-              element={
-                <Search
-                  setPlayerId={setPlayerId}
-                  setIsPlayerIdChanged={setIsPlayerIdChanged}
-                />
-              }
-            />
-            <Route
-              path="artist/:id"
-              element={<Artist setPlayerId={setPlayerId} />}
-            />
+    //         <Route
+    //           path="album/:id"
+    //           element={
+    //             <Album
+    //               setPlayerId={setPlayerId}
+    //               setIsPlayerIdChanged={setIsPlayerIdChanged}
+    //             />
+    //           }
+    //         />
+    //         <Route path="category/:id" element={<Category />} />
+    //         <Route
+    //           path="search"
+    //           element={
+    //             <Search
+    //               setPlayerId={setPlayerId}
+    //               setIsPlayerIdChanged={setIsPlayerIdChanged}
+    //             />
+    //           }
+    //         />
+    //         <Route
+    //           path="artist/:id"
+    //           element={<Artist setPlayerId={setPlayerId} />}
+    //         />
 
-            <Route
-              path="playlist/:id"
-              element={<Playlist setPlayerId={setPlayerId} />}
-            />
-          </Routes>
-        </div>
-        {location.pathname != '/login' && !!playerId && (
-          <Audio playerId={playerId} />
-        )}
-      </div>
-      {location.pathname != '/login' && (
-        <ToastContainer limit={1} containerId="toast-container" />
-      )}
-    </AuthRequired>
+    //         <Route
+    //           path="playlist/:id"
+    //           element={<Playlist setPlayerId={setPlayerId} />}
+    //         />
+    //       </Routes>
+    //     </div>
+    //     {location.pathname != '/login' && !!playerId && (
+    //       <Audio playerId={playerId} />
+    //     )}
+    //   </div>
+    //   {location.pathname != '/login' && (
+    //     <ToastContainer limit={1} containerId="toast-container" />
+    //   )}
+    // </AuthRequired>
+
+    <div>
+      <ErrorBoundaryTest />
+    </div>
   );
 };
 
