@@ -1,0 +1,104 @@
+.login-page {
+  background-color: #1f1f1f;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.logo {
+  width: 30%;
+}
+
+a.login-link {
+  text-decoration: none;
+  position: relative;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  padding: 5px 20px;
+  transition: 0.5s;
+  background: #fff;
+  &:hover {
+    letter-spacing: 0.25em;
+    background: #6c5ce7;
+    box-shadow: 0 0 35px #6c5ce7;
+    color: #6c5ce7;
+    i:before {
+      width: 20px;
+      left: 20%;
+    }
+    i:after {
+      width: 20px;
+      left: 80%;
+    }
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #27282c;
+  }
+  span {
+    position: relative;
+    z-index: 1;
+  }
+  i {
+    position: absolute;
+    inset: 0;
+    display: block;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 80%;
+      width: 10px;
+      height: 4px;
+      background: #27282c;
+      transform: translateX(-50%) skewX(325deg);
+      transition: 0.5s;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      width: 10px;
+      height: 4px;
+      background: #27282c;
+      transform: translateX(-50%) skewX(325deg);
+      transition: 0.5s;
+    }
+  }
+}
+.Typewriter {
+  z-index: 10;
+  color: #fff;
+  font-weight: 400;
+  font-size: 1rem;
+  padding-bottom: 10px;
+  text-align: center;
+  & span {
+    strong {
+      color: #8d65ea;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  a.login-link {
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    padding: 10px 30px;
+  }
+
+  .Typewriter {
+    font-weight: 600;
+    font-size: 2rem;
+  }
+}

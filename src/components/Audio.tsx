@@ -29,9 +29,7 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
   const [volume, setVolume] = useState(
     Number(localStorage.getItem('music-volume') || 1)
   );
-  const [isMuted, setIsMuted] = useState(
-    Number(localStorage.getItem('music-muted')) || false
-  );
+
   const [duration, setDuration] = useState(0);
   const [isLoop, setIsLoop] = useState(false);
 
@@ -68,22 +66,25 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : volume;
+      audioRef.current.volume = audioRef.current.muted ? 0 : volume;
     }
     localStorage.setItem('music-volume', JSON.stringify(volume));
-    localStorage.setItem('music-muted', JSON.stringify(+isMuted));
-  }, [isMuted, volume]);
+  }, [audioRef.current?.muted, volume, playerId]);
 
   useEffect(() => {
     dispatch(fetchAudioRequest(playerId));
-    setIsPaused(true);
   }, [playerId]);
+
+  // if (error) {
+  //   throw new Error(error);
+  // }
 
   return (
     <>
       <audio
         controls
         ref={audioRef}
+        key={audio.tracks[0]?.id}
         src={audio.tracks[0]?.preview_url}
         className="hidden"
         hidden
@@ -98,6 +99,8 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
           if (audioRef.current) {
             setCurrentTime(0);
             setDuration(audioRef.current.duration);
+            setIsPaused(false);
+            audioRef.current?.play();
           }
         }}
         onEndedCapture={() => {
@@ -145,13 +148,16 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
             <button
               title={isError ? 'Error' : isPaused ? 'Play' : 'Pause'}
-              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200 ${
-                isError ? 'border-red-500' : ''
-              } ${isPaused ? '' : 'border-purple-hover'}`}
+              className={`h-8 w-8 border rounded-full flex justify-center items-center group hover:border-purple-hover transition duration-200
+              ${isPaused ? '' : 'border-purple-hover'} ${
+                isError || audio.tracks[0].preview_url === null
+                  ? 'border-red-500 !important'
+                  : ''
+              }  `}
               onClick={() => setIsPaused((prev) => !prev)}
               disabled={!!error || loading}
             >
-              {isError ? (
+              {isError || audio.tracks[0].preview_url === null ? (
                 <span className="text-red-500">{`!`}</span>
               ) : loading ? (
                 <Spinner />
@@ -175,14 +181,21 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
 
           <div className="items-center justify-center hidden w-full gap-4 text-sm md:flex">
             <span className="flex-shrink-0">
-              {formatDuration(currentTime * 1000)}
+              {audio.tracks[0].preview_url === null
+                ? formatDuration(0 * 1000)
+                : formatDuration(currentTime * 1000)}
             </span>
 
             <Volume
               className="flex-grow max-w-[400px]"
-              width={duration !== 0 ? (currentTime / duration) * 100 : 0}
+              width={
+                audio.tracks[0].preview_url === null
+                  ? 0
+                  : duration !== 0
+                  ? (currentTime / duration) * 100
+                  : 0
+              }
               setWidth={(val: number) => {
-                setCurrentTime((val / 100) * duration);
                 if (audioRef.current) {
                   audioRef.current.currentTime = (val / 100) * duration;
                 }
@@ -195,32 +208,39 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
         </div>
 
         <div className="flex items-center justify-end flex-1 gap-3">
-          <button
-            title={isMuted || volume === 0 ? 'Unmute' : 'Mute'}
-            onClick={() => {
-              if (volume === 0) {
-                setVolume(1);
-                setIsMuted(!isMuted);
-              } else {
-                setIsMuted(!isMuted);
-              }
-            }}
-          >
-            {isMuted || volume === 0 ? (
-              <MdVolumeOff className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
-            ) : (
-              <MdVolumeUp className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
-            )}
-          </button>
-          <div className="hidden md:block">
-            <Volume
-              className="w-[100px]"
-              width={isMuted ? 0 : volume * 100}
-              setWidth={(value: number) => {
-                setVolume(value / 100);
-                setIsMuted(false);
+          {audioRef.current !== null && (
+            <button
+              title={audioRef.current.muted ? 'Unmute' : 'Mute'}
+              onClick={() => {
+                if (audioRef.current) {
+                  if (audioRef.current?.volume === 0) {
+                    audioRef.current.muted = false;
+                  } else {
+                    audioRef.current.muted = !audioRef.current.muted;
+                  }
+                }
               }}
-            />
+            >
+              {audioRef.current.muted || audioRef.current.volume === 0 ? (
+                <MdVolumeOff className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
+              ) : (
+                <MdVolumeUp className="w-5 h-5 transition duration-200 fill-white hover:fill-purple-hover" />
+              )}
+            </button>
+          )}
+
+          <div className="hidden md:block">
+            {audioRef.current !== null && (
+              <Volume
+                className="w-[100px]"
+                width={
+                  audioRef.current.muted ? 0 : audioRef.current.volume * 100
+                }
+                setWidth={(value: number) => {
+                  setVolume(value / 100);
+                }}
+              />
+            )}
           </div>
         </div>
       </div>
