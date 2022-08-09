@@ -237,7 +237,9 @@ const Audio: FC<AudioProps> = ({ playerId }) => {
                   audioRef.current.muted ? 0 : audioRef.current.volume * 100
                 }
                 setWidth={(value: number) => {
-                  setVolume(value / 100);
+                  if (audioRef.current) {
+                    audioRef.current.volume = value / 100;
+                  }
                 }}
               />
             )}
