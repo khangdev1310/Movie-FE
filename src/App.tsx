@@ -31,65 +31,61 @@ const App = () => {
   }, [location]);
 
   return (
-    // <AuthRequired>
-    //   <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">
-    //     <div className="min-h-[100vh] text-black font-bold dark:text-white ">
-    //       {location.pathname === '/login' ? null : <NavBar />}
+    <AuthRequired>
+      <div className="App bg-gradient-to-b  from-gray-300 to-pink-500 dark:from-purple-900 dark:to-purple-700">
+        <div className="min-h-[100vh] text-black font-bold dark:text-white ">
+          {location.pathname === '/login' ? null : <NavBar />}
 
-    //       <Routes>
-    //         <Route
-    //           index
-    //           element={
-    //             <Home
-    //               setPlayerId={setPlayerId}
-    //               setIsPlayerIdChanged={setIsPlayerIdChanged}
-    //             />
-    //           }
-    //         />
-    //         <Route path="login" element={<Login />} />
+          <Routes>
+            <Route
+              index
+              element={
+                <Home
+                  setPlayerId={setPlayerId}
+                  setIsPlayerIdChanged={setIsPlayerIdChanged}
+                />
+              }
+            />
+            <Route path="login" element={<Login />} />
 
-    //         <Route
-    //           path="album/:id"
-    //           element={
-    //             <Album
-    //               setPlayerId={setPlayerId}
-    //               setIsPlayerIdChanged={setIsPlayerIdChanged}
-    //             />
-    //           }
-    //         />
-    //         <Route path="category/:id" element={<Category />} />
-    //         <Route
-    //           path="search"
-    //           element={
-    //             <Search
-    //               setPlayerId={setPlayerId}
-    //               setIsPlayerIdChanged={setIsPlayerIdChanged}
-    //             />
-    //           }
-    //         />
-    //         <Route
-    //           path="artist/:id"
-    //           element={<Artist setPlayerId={setPlayerId} />}
-    //         />
+            <Route
+              path="album/:id"
+              element={
+                <Album
+                  setPlayerId={setPlayerId}
+                  setIsPlayerIdChanged={setIsPlayerIdChanged}
+                />
+              }
+            />
+            <Route path="category/:id" element={<Category />} />
+            <Route
+              path="search"
+              element={
+                <Search
+                  setPlayerId={setPlayerId}
+                  setIsPlayerIdChanged={setIsPlayerIdChanged}
+                />
+              }
+            />
+            <Route
+              path="artist/:id"
+              element={<Artist setPlayerId={setPlayerId} />}
+            />
 
-    //         <Route
-    //           path="playlist/:id"
-    //           element={<Playlist setPlayerId={setPlayerId} />}
-    //         />
-    //       </Routes>
-    //     </div>
-    //     {location.pathname != '/login' && !!playerId && (
-    //       <Audio playerId={playerId} />
-    //     )}
-    //   </div>
-    //   {location.pathname != '/login' && (
-    //     <ToastContainer limit={1} containerId="toast-container" />
-    //   )}
-    // </AuthRequired>
-
-    <div>
-      <ErrorBoundaryTest />
-    </div>
+            <Route
+              path="playlist/:id"
+              element={<Playlist setPlayerId={setPlayerId} />}
+            />
+          </Routes>
+        </div>
+        {location.pathname != '/login' && !!playerId && (
+          <Audio playerId={playerId} />
+        )}
+      </div>
+      {location.pathname != '/login' && (
+        <ToastContainer limit={1} containerId="toast-container" />
+      )}
+    </AuthRequired>
   );
 };
 
