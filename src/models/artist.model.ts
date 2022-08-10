@@ -113,19 +113,11 @@ export interface Artist {
   uri: string;
 }
 
-export interface ExternalUrls {
-  spotify: string;
-}
 
 export interface ExternalUrls2 {
   spotify: string;
 }
 
-export interface Image {
-  height: number;
-  url: string;
-  width: number;
-}
 
 export interface Artist2 {
   external_urls: string;
@@ -199,28 +191,9 @@ export interface Item {
   uri: string;
 }
 
-export interface Artist {
-  external_urls: string;
-  href: string;
-  id: string;
-  name: string;
-  type: string;
-  uri: string;
-}
 
-export interface ExternalUrls {
-  spotify: string;
-}
 
-export interface ExternalUrls2 {
-  spotify: string;
-}
 
-export interface Image {
-  height: number;
-  url: string;
-  width: number;
-}
 
 export interface FetchArtistAlbumsSuccessPayload {
   data: RootArtistAlbums;
@@ -263,20 +236,12 @@ export interface ArtistRelated {
   uri: string;
 }
 
-export interface ExternalUrls {
-  spotify: string;
-}
 
 export interface ArtistRelatedFollowers {
   href: any;
   total: number;
 }
 
-export interface Image {
-  height: number;
-  url: string;
-  width: number;
-}
 
 export interface FetchArtistRelatedSuccessPayload {
   data: RootArtistRelated;
