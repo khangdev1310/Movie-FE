@@ -1,10 +1,11 @@
-import { FC, FormEvent, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { debounce } from 'lodash';
+import React, { FC, FormEvent, useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { BsFillMoonFill, BsSunFill } from 'react-icons/bs';
 import { MdCancel } from 'react-icons/md';
-import useDarkMode from './DarkMode';
-import { BsSunFill, BsFillMoonFill } from 'react-icons/bs';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import useDarkMode from './DarkMode';
 
 const StyledImg = styled.img`
   width: 48px;
@@ -39,12 +40,46 @@ const NavBar: FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSubmitForm = (e: FormEvent) => {
+  // eslint-disable-next-line react/prop-types
+  function ButtonSearch({ handleOpen, isOpen }) {
+    return (
+      <button className="md:hidden" onClick={handleOpen}>
+        {isOpen ? (
+          <MdCancel className="w-6 h-6 font-extrabold" />
+        ) : (
+          <AiOutlineSearch className="w-6 h-6 font-extrabold" />
+        )}
+      </button>
+    );
+  }
+  // Input
+
+  const handleSubmitForm = (e: FormEvent, value: string) => {
     e.preventDefault();
-    if (inputValue.trim()) {
-      navigate(`/search?q=${encodeURIComponent(inputValue.trim())}`);
+    if (value.trim()) {
+      navigate(`/search?q=${encodeURIComponent(value.trim())}`);
+    }
+
+    if (value.trim() === '') {
+      navigate('/');
     }
   };
+  const debouncedSearch = useRef(
+    debounce(async (event, criteria) => {
+      handleSubmitForm(event, criteria);
+      setInputValue(criteria);
+    }, 1000)
+  ).current;
+
+  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(e, e.target.value);
+  };
+
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -80,23 +115,34 @@ const NavBar: FC = () => {
             />
           )}
         </div>
-        <button className="md:hidden" onClick={handleOpen}>
-          {isOpen ? (
-            <MdCancel className="w-6 h-6 font-extrabold" />
-          ) : (
-            <AiOutlineSearch className="w-6 h-6 font-extrabold" />
-          )}
-        </button>
+        <p
+          className="flex justify-center items-center pr-3 cursor-pointer md:hidden"
+          onClick={() => {
+            localStorage.removeItem('token');
+            navigate('/login');
+          }}
+        >
+          Đăng xuất
+        </p>
+        <ButtonSearch handleOpen={handleOpen} isOpen={isOpen} />
       </div>
 
       <form
         className={`relative ${isOpen ? 'flex' : 'hidden'} sm:!flex `}
-        onSubmit={handleSubmitForm}
+        onSubmit={(e) => handleSubmitForm(e, inputValue)}
       >
+        <p
+          className="justify-center items-center pr-0 md:pr-3 cursor-pointer hidden md:flex dark:hover:text-purple-hover duration-300"
+          onClick={() => {
+            localStorage.removeItem('token');
+            navigate('/login');
+          }}
+        >
+          Đăng xuất
+        </p>
         <StyleInput
           type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={handleChangeSearch}
           onKeyDown={(e) => e.stopPropagation()}
           onKeyUp={(e) => e.stopPropagation()}
           className="dark:hover:border-purple-hover "

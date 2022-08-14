@@ -54,11 +54,24 @@ const GridItem: any = (item, handler, classType) => (
   </div>
 );
 
-const GridItemLink: FC<DataType> = (item, handler) => (
-  <div key={item.id}>
-    <Link to={handler(item.id)}>{GridItem(item, handler)}</Link>
-  </div>
-);
+const GridItemLink: FC<DataType> = (item, handler) => {
+  return (
+    <div key={item?.id}>
+      <Link to={handler(item?.id)}>{GridItem(item, handler)}</Link>
+    </div>
+  );
+};
+
+const dataTest = {
+  id: '15',
+  title: 'Error boundary',
+  image: 'https://i.scdn.co/image/ab67616d0000b273bd14e958d6f3eabbcad5476b',
+  description: 'test error boundary',
+};
+
+const handleTest = () => {
+  return `album/` + dataTest.id;
+};
 
 const DataGrid: FC<DataGridProps> = ({ data, type, handler, classType }) => {
   return (
@@ -68,6 +81,9 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler, classType }) => {
           ? GridItemLink(item, handler)
           : GridItem(item, handler, classType);
       })}
+      <div>
+        <div key="aaaa">{GridItemLink(dataTest, handleTest)}</div>
+      </div>
     </div>
   );
 };

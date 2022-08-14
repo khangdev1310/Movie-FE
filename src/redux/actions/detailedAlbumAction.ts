@@ -4,17 +4,25 @@ import {
   FetchDetailedAlbumRequest,
   FetchDetailedAlbumSuccess,
   FetchDetailedAlbumSuccessPayload,
-} from "../../models/detailed-album.model";
+} from '../../models/detailed-album.model';
 import {
   FETCH_DETAILED_ALBUM_FAILURE,
   FETCH_DETAILED_ALBUM_REQUEST,
   FETCH_DETAILED_ALBUM_SUCCESS,
-} from "../types/albumTypes";
+} from '../types/albumTypes';
 
-export const fetchDetailedAlbumRequest = (id: string): FetchDetailedAlbumRequest => ({
-  type: FETCH_DETAILED_ALBUM_REQUEST,
-  id
-});
+export const fetchDetailedAlbumRequest = (
+  id: string
+): FetchDetailedAlbumRequest => {
+  if (id === '15') {
+    throw new Error('Error');
+  }
+
+  return {
+    type: FETCH_DETAILED_ALBUM_REQUEST,
+    id,
+  };
+};
 
 export const fetchDetailedAlbumSuccess = (
   payload: FetchDetailedAlbumSuccessPayload

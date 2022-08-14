@@ -61,6 +61,21 @@ axiosClient.interceptors.response.use(
           });
           toast.clearWaitingQueue({ containerId: 'toast-container' });
           break;
+          case 500:
+          // toast.error('Server Error', {
+          //   position: 'bottom-center',
+          //   autoClose: 1000,
+          //   hideProgressBar: false,
+          //   closeOnClick: false,
+          //   pauseOnHover: false,
+          //   draggable: false,
+          //   progress: undefined,
+          //   onClose: () => {
+          //     window.location.href = '/'
+          //   }
+          // });
+          // toast.clearWaitingQueue({ containerId: 'toast-container' });
+          throw err
         default:
           return Promise.reject(err);
       }

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 type IProps = {
@@ -63,14 +64,20 @@ const StyledLink = styled.a`
 `;
 
 const ErrorBoundaryFallback: FC<IProps> = ({ error, resetErrorBoundary }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    resetErrorBoundary();
+    navigate('/');
+  };
   return (
     <StyledDivParent id="notfound">
       <StyleDivChild className="notfound">
-        <div className="notfound-404 h-[280px] relative">
-          <StyledH1>Error</StyledH1>
+        <div className="notfound-404 h-[200px]  md:h-[280px] relative flex justify-center items-center md:block">
+          <StyledH1 className="text-[100px] md:text-[200px]">Error</StyledH1>
         </div>
         <StyledH2>{error.message}</StyledH2>
-        <StyledLink className="errorLink" onClick={resetErrorBoundary}>
+        <StyledLink className="errorLink" onClick={handleClick}>
           Quay trở lại trang chủ
         </StyledLink>
       </StyleDivChild>
