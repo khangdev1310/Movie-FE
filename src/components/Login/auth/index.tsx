@@ -1,5 +1,4 @@
-import { memo } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import { Container } from 'tsparticles-engine';
@@ -8,8 +7,11 @@ import { loginEndpoint } from '../../../ultils/spotify';
 import './Login.scss';
 
 function Login() {
-  if (localStorage.getItem('token')) {
-    return <Navigate to="/" />;
+  const token = localStorage.getItem('token');
+
+  const location = useLocation();
+  if (token !== null && location.pathname === '/login') {
+    return <Navigate to="/" replace state={{ from: location }} />;
   }
 
   const particlesInit = async (main: any) => {
@@ -122,4 +124,4 @@ function Login() {
   );
 }
 
-export default memo(Login);
+export default Login;

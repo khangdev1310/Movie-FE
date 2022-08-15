@@ -6,8 +6,10 @@ type Props = {
 };
 
 const AuthRequired: FC<Props> = ({ children }) => {
+  // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState<string | null>('');
   const navigate = useNavigate();
+
   useEffect(() => {
     const hash = window.location.hash;
     const accessToken = localStorage.getItem('token');
@@ -19,9 +21,9 @@ const AuthRequired: FC<Props> = ({ children }) => {
     } else {
       setToken(accessToken);
     }
-    if (token === null || token === '') {
-      // return <Navigate to="/login" replace />;
-      navigate('/login', { replace: true });
+
+    if (accessToken === null || accessToken === '') {
+      navigate('/login');
     }
   }, []);
 
