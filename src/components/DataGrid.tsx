@@ -81,9 +81,9 @@ const DataGrid: FC<DataGridProps> = ({ data, type, handler, classType }) => {
           ? GridItemLink(item, handler)
           : GridItem(item, handler, classType);
       })}
-      <div>
+      {/* <div>
         <div key="aaaa">{GridItemLink(dataTest, handleTest)}</div>
-      </div>
+      </div> */}
     </div>
   );
 };
